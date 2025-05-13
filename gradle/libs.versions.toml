@@ -2,6 +2,9 @@
 ## Android gradle plugin
 agp = "8.7.3"
 
+# https://github.com/google/desugar_jdk_libs/blob/master/CHANGELOG.md
+androidDesugarJdkLibs = "2.1.4"
+
 ## Androidx
 # https://developer.android.com/jetpack/androidx/releases/core
 androidxCore = "1.16.0"
@@ -36,6 +39,10 @@ hilt = "2.55"
 # https://developer.android.com/jetpack/androidx/releases/hilt
 hiltNavigationCompose = "1.2.0"
 
+## Coroutine
+# https://github.com/Kotlin/kotlinx.coroutines
+coroutine = "1.10.1"
+
 ## Network
 # okhttp
 # # https://square.github.io/okhttp/
@@ -59,6 +66,10 @@ androidxEspresso = "3.6.1"
 detekt = "1.23.7"
 
 [libraries]
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
@@ -74,6 +85,7 @@ androidx-compose-ui-testManifest = { group = "androidx.compose.ui", name = "ui-t
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxComposeNavigation" }
 androidx-compose-navigation-test = { group = "androidx.navigation", name = "navigation-testing", version.ref = "androidxComposeNavigation" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+compose-compiler-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
@@ -91,8 +103,18 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
-androidx-junit-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
+
+coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutine" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutine" }
+
+# verify
+verify-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+
+# plugin
+verify-detektPlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
