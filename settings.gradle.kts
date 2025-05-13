@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -7,6 +8,7 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
+        gradlePluginPortal()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -21,4 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeBaseProject"
 include(":app")
-include(":build-logic")

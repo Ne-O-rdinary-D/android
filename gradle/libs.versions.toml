@@ -15,7 +15,7 @@ androidxLifecycle = "2.9.0"
 
 ## Kotlin
 # https://github.com/JetBrains/kotlin
-kotlin = "2.0.0"
+kotlin = "2.1.0"
 # https://github.com/Kotlin/kotlinx.serialization
 kotlinxSerializationJson = "1.8.0"
 # https://github.com/Kotlin/kotlinx-datetime/releases
@@ -125,5 +125,12 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 verify-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-test = { id = "com.android.test", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+## precompiled plugins
+composebaseproject-android-application = { id = "composebaseproject.android.application", version = "unspecified" }
+composebaseproject-android-compose = { id = "composebaseproject.android.compose", version = "unspecified" }
+composebaseproject-android-feature = { id = "composebaseproject.android.feature", version = "unspecified" }
+composebaseproject-android-library = { id = "composebaseproject.android.library", version = "unspecified" }
+composebaseproject-kotlin-library = { id = "composebaseproject.kotlin.library", version = "unspecified" }

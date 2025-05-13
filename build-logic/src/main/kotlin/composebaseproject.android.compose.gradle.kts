@@ -1,0 +1,3 @@
+import com.example.composebaseproject.configureComposeAndroid
+
+configureComposeAndroid()
