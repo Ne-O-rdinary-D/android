@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeBaseProject"
 include(":app")
-include(":build-src")
+include(":build-logic")
