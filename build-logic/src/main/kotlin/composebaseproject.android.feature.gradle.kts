@@ -16,6 +16,7 @@ android {
 
 dependencies {
     implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
 
     val libs = project.extensions.libs
 

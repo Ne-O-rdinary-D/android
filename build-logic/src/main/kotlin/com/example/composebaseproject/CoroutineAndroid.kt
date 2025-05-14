@@ -7,14 +7,14 @@ internal fun Project.configureCoroutineAndroid() {
     val libs = extensions.libs
     configureCoroutineKotlin()
     dependencies {
-        "implementation"(libs.findLibrary("coroutines.android").get())
+        add("implementation", libs.findLibrary("coroutines.android").get())
     }
 }
 
 internal fun Project.configureCoroutineKotlin() {
     val libs = extensions.libs
     dependencies {
-        "implementation"(libs.findLibrary("coroutines.core").get())
-        "testImplementation"(libs.findLibrary("coroutines.test").get())
+        add("implementation", libs.findLibrary("coroutines.core").get())
+        add("testImplementation", libs.findLibrary("coroutines.test").get())
     }
 }
