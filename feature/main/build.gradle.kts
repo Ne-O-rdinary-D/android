@@ -7,4 +7,6 @@ plugins {
 setNamespace("feature.main")
 
 dependencies {
+    implementation(projects.feature.home)
+    implementation(libs.kotlinx.immutable)
 }

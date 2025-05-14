@@ -25,3 +25,5 @@ rootProject.name = "ComposeBaseProject"
 include(":app")
 include(":feature:main")
 include(":core:designsystem")
+include(":core:navigation")
+include(":feature:home")
