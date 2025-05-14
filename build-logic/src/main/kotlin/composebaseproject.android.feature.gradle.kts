@@ -15,6 +15,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:designsystem"))
+
     val libs = project.extensions.libs
 
     implementation(libs.findLibrary("hilt.navigation.compose").get())
