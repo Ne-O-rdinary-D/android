@@ -1,6 +1,6 @@
 package com.example.composebaseproject.core.network.di
 
-import com.example.composebaseproject.core.network.AuthApi
+import com.example.composebaseproject.core.network.UserApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +55,6 @@ internal object NetworkModule {
     private const val TYPE_JSON = "application/json"
 
     @Provides
-    fun provideRetrofitApi(retrofit: Retrofit): AuthApi =
-        retrofit.create(AuthApi::class.java)
+    fun provideRetrofitApi(retrofit: Retrofit): UserApi =
+        retrofit.create(UserApi::class.java)
 }

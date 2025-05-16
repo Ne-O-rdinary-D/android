@@ -24,7 +24,7 @@ fun getProperty(key: String): String {
 }
 
 dependencies {
-    api(projects.core.model)
+    implementation(projects.core.model)
 
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
