@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.example.composebaseproject.feature.home.homeNavGraph
+import com.example.composebaseproject.feature.home.navigation.homeNavGraph
 import com.example.composebaseproject.feature.main.MainNavigator
 
 @Composable

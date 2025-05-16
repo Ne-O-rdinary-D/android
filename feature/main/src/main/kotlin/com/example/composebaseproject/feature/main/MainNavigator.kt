@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.example.composebaseproject.core.navigation.MainTabRoute
 import com.example.composebaseproject.core.navigation.Route
-import com.example.composebaseproject.feature.home.navigateHome
+import com.example.composebaseproject.feature.home.navigation.navigateHome
 
 internal class MainNavigator(
     val navController: NavHostController

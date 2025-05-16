@@ -1,5 +1,6 @@
 package com.example.composebaseproject.core.network.di
 
+import com.example.composebaseproject.core.network.BuildConfig
 import com.example.composebaseproject.core.network.UserApi
 import dagger.Module
 import dagger.Provides

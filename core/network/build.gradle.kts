@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-setNamespace("core.navigation")
+setNamespace("core.network")
 
 android {
     buildTypes {
