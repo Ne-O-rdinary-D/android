@@ -24,7 +24,7 @@ fun getProperty(key: String): String {
 }
 
 dependencies {
-    implementation(libs.kotlinx.datetime)
+    api(projects.core.model)
 
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)

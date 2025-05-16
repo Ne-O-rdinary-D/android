@@ -1,4 +1,4 @@
-package com.example.composebaseproject.core.network.extension
+package com.example.composebaseproject.core.network.util
 
 import com.example.composebaseproject.core.network.model.ApiResponse
 import com.example.composebaseproject.core.network.model.ErrorResponse
