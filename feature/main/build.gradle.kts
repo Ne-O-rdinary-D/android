@@ -12,4 +12,6 @@ dependencies {
     implementation(projects.feature.quiz)
 
     implementation(libs.kotlinx.immutable)
+    implementation(projects.feature.rank)
+    implementation(projects.feature.my)
 }

@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -63,7 +64,7 @@ internal fun SelectInterestScreen(
 
         Text(
             text = "관심 있는 환경 문제를\n선택해주세요!",
-            style = Typography.displayLarge,
+            style = MaterialTheme.typography.displayLarge,
             textAlign = TextAlign.Start
         )
 
@@ -71,7 +72,7 @@ internal fun SelectInterestScreen(
 
         Text(
             text = "선택한 환경 문제부터 퀴즈를 풀 수 있어요!",
-            style = Typography.bodyMedium,
+            style = MaterialTheme.typography.displayMedium,
             color = Color.Gray
         )
 

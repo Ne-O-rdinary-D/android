@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -45,14 +46,14 @@ internal fun JoinScreen(
         Text(
             text = "지구를 지켜줄",
             color = MainGreen,
-            style = Typography.displayLarge
+            style = MaterialTheme.typography.displayLarge
         )
         Spacer(
             modifier = Modifier.height(8.dp)
         )
         Text(
             text = "닉네임을 설정해주세요!",
-            style = Typography.displayLarge
+            style = MaterialTheme.typography.displayLarge
         )
 
 

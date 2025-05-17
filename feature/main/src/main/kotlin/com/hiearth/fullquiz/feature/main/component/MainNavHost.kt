@@ -11,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import com.hiearth.fullquiz.feature.home.navigation.homeNavGraph
 import com.hiearth.fullquiz.feature.main.MainNavigator
 import com.hiearth.fullquiz.feature.main.MainTab
+import com.hiearth.fullquiz.feature.my.navigation.myNavGraph
 import com.hiearth.fullquiz.feature.nickname.navigation.introNavGraph
 import com.hiearth.fullquiz.feature.quiz.navigation.quizNavGraph
+import com.hiearth.fullquiz.feature.rank.navigation.rankNavGraph
 
 @Composable
 internal fun MainNavHost(
@@ -41,6 +43,14 @@ internal fun MainNavHost(
                 padding = padding,
                 navigateHome = { navigator.navigate(MainTab.HOME) },
                 navigateRanking = { navigator.navigate(MainTab.RANKING) }
+            )
+
+            rankNavGraph(
+                padding = padding
+            )
+
+            myNavGraph(
+                padding = padding
             )
         }
     }

@@ -28,6 +28,8 @@ include(":feature:main")
 include(":feature:home")
 include(":feature:intro")
 include(":feature:quiz")
+include(":feature:rank")
+include(":feature:my")
 
 include(":core:local")
 include(":core:network")
