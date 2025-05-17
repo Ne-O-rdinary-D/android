@@ -2,6 +2,7 @@ package com.hiearth.fullquiz.feature.rank.component
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
@@ -53,7 +55,7 @@ fun RankList(
         ) {
             itemsIndexed(rankList) { index, rankData ->
                 val visibleFirstIndex = listState.firstVisibleItemIndex
-                val widthFraction = (1.0f - (visibleFirstIndex-index) * 0.1f).coerceAtLeast(0.7f)
+                val widthFraction = (1.0f - (visibleFirstIndex - index) * 0.1f).coerceAtLeast(0.7f)
 
                 val animatedWidth = animateDpAsState(
                     targetValue = (widthFraction * LocalConfiguration.current.screenWidthDp).dp,
@@ -80,17 +82,29 @@ private fun RankBox(
     nickname: String
 ) {
     val isMine = rankData.nickname == nickname
-    val border = if (isMine) BorderStroke(1.5.dp, MainGreen) else null
+    val borderGradient = if (isMine) {
+        Brush.horizontalGradient(
+            colors = listOf(MainGreen, Color(0xFF2197FF))
+        )
+    } else {
+        null
+    }
 
-    Surface(
+    Box(
         modifier = Modifier
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        color = Color.White,
-        border = border
+            .fillMaxWidth()
+            .padding(1.5.dp)
+            .let {
+                if (borderGradient != null) {
+                    it.background(borderGradient, shape = RoundedCornerShape(16.dp))
+                } else it
+            }
+            .padding(1.5.dp)
     ) {
         Row(
             modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White, shape = RoundedCornerShape(16.dp)) // 내부 내용 배경
                 .padding(vertical = 8.dp, horizontal = 24.dp)
                 .height(80.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -118,6 +132,7 @@ private fun RankBox(
             )
         }
     }
+
 }
 
 
