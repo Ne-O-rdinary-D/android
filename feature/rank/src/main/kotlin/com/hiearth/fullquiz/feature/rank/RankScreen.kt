@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,17 +29,20 @@ fun RankRoute(
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-
     RankScreen(
         padding = padding,
-        uiState = uiState.value
+        uiState = uiState.value,
+        reLoad = {
+            viewModel.reLoad()
+        }
     )
 }
 
 @Composable
 private fun RankScreen(
     padding: PaddingValues,
-    uiState: RankUiState
+    uiState: RankUiState,
+    reLoad: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -46,6 +50,11 @@ private fun RankScreen(
             .padding(padding)
             .background(MaterialTheme.colorScheme.background)
     ) {
+        if (uiState is RankUiState.Loading) {
+            CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.Center)
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -64,7 +73,10 @@ private fun RankScreen(
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    RankList(uiState.rankList, uiState.nickname)
+                    RankList(
+                        uiState.rankList, uiState.nickname,
+                        reLoad = { reLoad() }
+                    )
                 }
             }
         }
