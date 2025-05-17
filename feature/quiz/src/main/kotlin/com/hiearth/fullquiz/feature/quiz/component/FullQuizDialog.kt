@@ -60,53 +60,53 @@ internal fun FullQuizDialog(
                         imageVector = ImageVector.vectorResource(iconResId),
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(56.dp)
                     )
                 }
 
                 Text(
                     style = MaterialTheme.typography.displayMedium,
+                    textAlign = TextAlign.Center,
                     text = title,
                     color = AppColors.Black
                 )
 
                 Text(
-                    style = MaterialTheme.typography.bodySmall,
-                    textAlign = TextAlign.Start,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
                     text = description
                 )
 
-                Column (
+                TextButton(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+                        .fillMaxWidth()
+                        .clip(shape = RoundedCornerShape(100.dp))
+                        .background(MaterialTheme.colorScheme.primary),
+                    onClick = {
+                        onDismiss()
+                    }
                 ) {
-                    TextButton(
-                        modifier = Modifier.fillMaxWidth().clip(shape = RoundedCornerShape(100.dp)),
-                        onClick = {
-                            onDismiss()
-                        }
-                    ) {
-                        Text(
-                            style = MaterialTheme.typography.labelLarge,
-                            color = AppColors.White,
-                            text = dismissText
-                        )
-                    }
+                    Text(
+                        style = MaterialTheme.typography.titleMedium,
+                        color = AppColors.White,
+                        text = dismissText
+                    )
+                }
 
-                    TextButton(
-                        modifier = Modifier.background(Color.Transparent),
-                        onClick = {
-                            onDismiss()
-                            onConfirm()
-                        }
-                    ) {
-                        Text(
-                            style = MaterialTheme.typography.titleMedium,
-                            color = AppColors.Gray04,
-                            text = confirmText
-                        )
+                TextButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.Transparent),
+                    onClick = {
+                        onDismiss()
+                        onConfirm()
                     }
+                ) {
+                    Text(
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = AppColors.Gray04,
+                        text = confirmText
+                    )
                 }
             }
         }

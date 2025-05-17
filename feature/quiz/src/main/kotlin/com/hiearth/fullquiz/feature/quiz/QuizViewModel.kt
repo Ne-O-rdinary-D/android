@@ -5,8 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.hiearth.fullquiz.core.data.QuizRepository
 import com.hiearth.fullquiz.core.data.UserRepository
 import com.hiearth.fullquiz.core.model.Answer
-import com.hiearth.fullquiz.core.model.Quiz
-import com.hiearth.fullquiz.core.model.QuizType
 import com.hiearth.fullquiz.feature.quiz.model.QuizUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +37,14 @@ class QuizViewModel @Inject constructor(
                 interests = (_uiState.value as QuizUiState.Success).interests
             )
         }
+    }
+
+    fun getQuizState(): Boolean {
+        return (_uiState.value as QuizUiState.Success).quizList.all { it.userAnswer != null }
+    }
+
+    fun getCorrectQuizNum(): Int {
+        return (_uiState.value as QuizUiState.Success).quizList.count { it.userAnswer == it.answer }
     }
 
     private fun getQuizList() {

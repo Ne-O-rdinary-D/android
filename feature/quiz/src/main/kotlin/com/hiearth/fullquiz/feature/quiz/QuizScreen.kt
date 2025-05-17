@@ -14,7 +14,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -56,16 +55,20 @@ internal fun QuizRoute(
     if(isCompleted == null) {
 
     } else if(isCompleted == true) {
+        val correctNum = viewModel.getCorrectQuizNum()
         FullQuizDialog(
             title = "축하해요\n챕터를 완료했어요!",
+            iconResId = R.drawable.ic_celebrate,
             dismissText = "내 랭킹 보기",
             confirmText = "홈으로",
+            description = "오답 수 ${(5-correctNum)}개  정답 수 ${correctNum}개",
             onDismiss = navigateRanking,
             onConfirm = navigateHome
         )
     } else {
         FullQuizDialog(
-            title = "잠깐마요!\n정말 나가시겠어요",
+            title = "잠깐만요!\n정말 나가시겠어요",
+            iconResId = R.drawable.ic_wait,
             dismissText = "돌아갈래요",
             confirmText = "나갈래요",
             onDismiss = {isCompleted = null},
@@ -83,8 +86,8 @@ internal fun QuizRoute(
                 currentStep = currentStep,
                 changeCurrentStep = { currentStep = it },
                 selectAnswer = viewModel::selectAnswer,
-                navigateHome = navigateHome,
-                navigateRanking = navigateRanking
+                getQuizComplete = viewModel::getQuizState,
+                closeQuiz = { isCompleted = viewModel.getQuizState() },
             )
         }
 
@@ -100,8 +103,8 @@ private fun QuizScreen(
     currentStep: Int = 3,
     changeCurrentStep: (Int) -> Unit = {},
     selectAnswer: (Int, Answer) -> Unit = { _, _ -> },
-    navigateHome: () -> Unit = {},
-    navigateRanking: () -> Unit = {}
+    getQuizComplete: () -> Boolean = { false },
+    closeQuiz: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
@@ -113,7 +116,7 @@ private fun QuizScreen(
     ) {
         QuizHeader(
             interests = interests,
-            navigateRanking = navigateRanking
+            closeQuiz = closeQuiz
         )
         Column(
             modifier = Modifier
@@ -167,11 +170,10 @@ private fun QuizScreen(
         }
         PrevNextButtons(
             quizIndex = currentStep,
+            isSolved = quizList[currentStep].userAnswer != null,
             onClickPrev = { if (currentStep > 0) changeCurrentStep(currentStep - 1) },
             onClickNext = { if (currentStep < quizList.size - 1) changeCurrentStep(currentStep + 1) },
-            onClickComplete = {
-                // TODO 완료 다이얼로그
-            }
+            onClickComplete = closeQuiz
         )
     }
 }
