@@ -1,9 +1,9 @@
-package com.hiearth.fullquiz.core.data
+package com.hiearth.fullquiz.core.local.datasource
 
 import com.hiearth.fullquiz.core.model.Interests
-import com.hiearth.fullquiz.core.model.User
 
-interface UserRepository {
+interface PreferenceDataSource {
+
     fun setNickname(nickname: String)
     fun getNickname(): String
 

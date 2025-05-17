@@ -12,7 +12,7 @@ import com.hiearth.fullquiz.feature.home.navigation.homeNavGraph
 import com.hiearth.fullquiz.feature.main.MainNavigator
 import com.hiearth.fullquiz.feature.main.MainTab
 import com.hiearth.fullquiz.feature.nickname.navigation.introNavGraph
-import com.hiearth.fullquiz.feature.quiz.quizNavGraph
+import com.hiearth.fullquiz.feature.quiz.navigation.quizNavGraph
 
 @Composable
 internal fun MainNavHost(

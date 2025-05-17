@@ -12,7 +12,7 @@ import androidx.navigation.navOptions
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 import com.hiearth.fullquiz.feature.home.navigation.navigateHome
-import com.hiearth.fullquiz.feature.quiz.navigateQuiz
+import com.hiearth.fullquiz.feature.quiz.navigation.navigateQuiz
 
 class MainNavigator(
     val navController: NavHostController
