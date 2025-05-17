@@ -13,6 +13,6 @@ class IntroViewModel : ViewModel() {
     val uiState: StateFlow<IntroUiState> = _uiState
 
     fun getLoginState() {
-        SharedPreferenceManager
+        SharedPreferenceManager.isLoggedIn()
     }
 }

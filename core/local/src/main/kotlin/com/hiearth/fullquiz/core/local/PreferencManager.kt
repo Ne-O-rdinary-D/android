@@ -10,43 +10,37 @@ object SharedPreferenceManager {
     private const val KEY_NICKNAME = "nickname"
     private const val KEY_INTEREST = "interest"
 
-    private fun getPrefs(context: Context): SharedPreferences {
-        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-    }
+    private lateinit var prefs: SharedPreferences
 
+    fun init(context: Context) {
+        prefs = context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    }
 
     // Login
-    fun setLoggedIn(context: Context, isLoggedIn: Boolean) {
-        getPrefs(context).edit()
-            .putBoolean(KEY_IS_LOGGED_IN, isLoggedIn)
-            .apply()
+    fun setLoggedIn(isLoggedIn: Boolean) {
+        prefs.edit().putBoolean(KEY_IS_LOGGED_IN, isLoggedIn).apply()
     }
 
-    fun isLoggedIn(context: Context): Boolean {
-        return getPrefs(context).getBoolean(KEY_IS_LOGGED_IN, false)
+    fun isLoggedIn(): Boolean {
+        return prefs.getBoolean(KEY_IS_LOGGED_IN, false)
     }
 
     // Nickname
-    fun setNickname(context: Context, nickname: String) {
-        getPrefs(context).edit()
-            .putString(KEY_NICKNAME, nickname)
-            .apply()
+    fun setNickname(nickname: String) {
+        prefs.edit().putString(KEY_NICKNAME, nickname).apply()
     }
 
-    fun getNickname(context: Context): String {
-        return getPrefs(context).getString(KEY_NICKNAME, "") ?: ""
+    fun getNickname(): String {
+        return prefs.getString(KEY_NICKNAME, "") ?: ""
     }
-
 
     // Interest
-    fun setInterest(context: Context, interest: Interests) {
-        getPrefs(context).edit()
-            .putString(KEY_INTEREST, interest.name)
-            .apply()
+    fun setInterest(interest: Interests) {
+        prefs.edit().putString(KEY_INTEREST, interest.name).apply()
     }
 
-    fun getInterest(context: Context): Interests {
-        val name = getPrefs(context).getString(KEY_INTEREST, null)
+    fun getInterest(): Interests {
+        val name = prefs.getString(KEY_INTEREST, null)
         return try {
             name?.let { Interests.valueOf(it) } ?: Interests.RECYCLE
         } catch (e: IllegalArgumentException) {
@@ -54,9 +48,7 @@ object SharedPreferenceManager {
         }
     }
 
-
-    fun clearAll(context: Context) {
-        getPrefs(context).edit().clear().apply()
+    fun clearAll() {
+        prefs.edit().clear().apply()
     }
-
 }
