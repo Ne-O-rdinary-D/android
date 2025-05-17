@@ -97,7 +97,7 @@ private fun getTitleString(chapterStatusData: ChapterStatusData): String {
     val completedCount =
         chapterStatusData.chapterStatusList.count { it == ChapterStatusType.COMPLETE }
     val totalCount = chapterStatusData.chapterStatusList.size
-    return "${chapterStatusData.type.displayName} ${chapterStatusData.type.displayName} ($completedCount/$totalCount)"
+    return "${chapterStatusData.type.displayName} ($completedCount/$totalCount)"
 }
 
 

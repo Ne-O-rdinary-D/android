@@ -50,13 +50,14 @@ internal fun IntroRoute(
         uiState = uiState.value,
         onNicknameChange = { viewModel.onNicknameChanged(nickname = it) },
         onPageMove = {
-                viewModel.onPageMove()
+            viewModel.onPageMove()
         },
         onSelectInterest = {
             viewModel.onInterestChanged(it)
+
         },
         onJoin = { navigateToHome() },
-        onValidNickname = { }
+        onValidNickname = { viewModel.onValidCheck() }
     )
 }
 
