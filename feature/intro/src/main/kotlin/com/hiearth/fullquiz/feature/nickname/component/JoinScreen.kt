@@ -20,17 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hiearth.fullquiz.core.designsystem.theme.MainGreen
-import com.hiearth.fullquiz.core.designsystem.theme.Typography
 import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.core.model.User
 import com.hiearth.fullquiz.feature.nickname.EditTextBox
-import com.hiearth.fullquiz.feature.nickname.model.CheckType
+import com.hiearth.fullquiz.feature.nickname.model.ValidCheckType
 import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 
 @Composable
 internal fun JoinScreen(
     uiState: IntroUiState.Join,
-    checkRedundancy: CheckType,
+    checkRedundancy: ValidCheckType,
     onNicknameChange: (String) -> Unit,
     onValidCheck: () -> Unit
 ) {
@@ -107,9 +106,9 @@ fun JoinScreenPrev() {
                 name = "haha"
             ),
             interests = Interests.CLIMATE,
-            validCheckType = CheckType.DUPLICATE_CHECK
+            validCheckType = ValidCheckType.DUPLICATE_CHECK
         ),
-        checkRedundancy = CheckType.DUPLICATE_CHECK,
+        checkRedundancy = ValidCheckType.DUPLICATE_CHECK,
         onNicknameChange = {},
         onValidCheck = {}
     )

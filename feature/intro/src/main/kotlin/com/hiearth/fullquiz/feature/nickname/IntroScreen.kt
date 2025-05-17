@@ -151,7 +151,6 @@ fun EditTextBox(
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp),
-
                 decorationBox = { innerTextField ->
                     if (value.isEmpty()) {
                         Text(

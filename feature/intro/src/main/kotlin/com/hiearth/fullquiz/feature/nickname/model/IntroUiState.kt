@@ -9,7 +9,7 @@ sealed class IntroUiState() {
     data class Join(
         val user: User = User(0,""),
         val interests: Interests? = null,
-        val validCheckType: CheckType = CheckType.DUPLICATE_CHECK,
+        val validCheckType: ValidCheckType = ValidCheckType.DUPLICATE_CHECK,
         val isNameSet: Boolean = false
     ) : IntroUiState()
 
