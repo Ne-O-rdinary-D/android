@@ -2,11 +2,13 @@ package com.hiearth.fullquiz.core.network.di
 
 import com.hiearth.fullquiz.core.network.datasource.MyDataSource
 import com.hiearth.fullquiz.core.network.datasource.QuizDataSource
+import com.hiearth.fullquiz.core.network.datasource.QuizMyDataSource
 import com.hiearth.fullquiz.core.network.datasource.RankDataSource
 import com.hiearth.fullquiz.core.network.datasource.UserDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitMyDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitQuizDataSource
+import com.hiearth.fullquiz.core.network.retrofit.RetrofitQuizMyDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitUserDataSource
 import dagger.Binds
@@ -49,6 +51,11 @@ internal abstract class DataSourceModule {
         quizDataSource: RetrofitQuizDataSource
     ): QuizDataSource
 
+
+    @Binds
+    abstract fun bindQuizMyDataSource(
+        retrofitQuizMyDataSource: RetrofitQuizMyDataSource
+    ): QuizMyDataSource
 }
 
 @Qualifier

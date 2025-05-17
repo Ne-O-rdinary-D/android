@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,21 +21,30 @@ import com.hiearth.fullquiz.feature.my.model.MyUiState
 @Composable
 fun MyRoute(
     padding: PaddingValues,
-    viewModel: MyViewModel = hiltViewModel()
+    viewModel: MyViewModel = hiltViewModel(),
+    navigateQuiz: (String) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(Unit) {
+        viewModel.getMyStatus()
+    }
+
     MyScreen(
         padding,
-        uiState.value
+        uiState.value,
+        navigateQuiz = navigateQuiz
     )
 }
 
 @Composable
 private fun MyScreen(
     padding: PaddingValues,
-    uiState: MyUiState
+    uiState: MyUiState,
+    navigateQuiz: (String) -> Unit
 ) {
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +62,7 @@ private fun MyScreen(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 uiState.chapterStatusList.forEach {
-                    ChapterStatusList(it)
+                    ChapterStatusList(it, navigateQuiz)
                     Spacer(Modifier.height(24.dp))
                 }
             }

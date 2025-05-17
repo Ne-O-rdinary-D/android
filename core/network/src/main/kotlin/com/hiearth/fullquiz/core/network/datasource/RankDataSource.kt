@@ -1,11 +1,9 @@
 package com.hiearth.fullquiz.core.network.datasource
 
 import com.hiearth.fullquiz.core.network.model.ApiResponse
-import com.hiearth.fullquiz.core.network.model.response.rank.MyRankResponse
-import com.hiearth.fullquiz.core.network.model.response.rank.RankDataResponse
+import com.hiearth.fullquiz.core.network.model.response.RankResponse
 
 interface RankDataSource {
-    suspend fun getMyData(): ApiResponse<MyRankResponse>
+    suspend fun getRankData(nickname:String): ApiResponse<RankResponse>
 
-    suspend fun getRankList(): ApiResponse<List<RankDataResponse>>
 }
