@@ -1,30 +1,41 @@
 package com.hiearth.fullquiz.feature.home
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.hiearth.fullquiz.core.designsystem.theme.AppColors
+import com.hiearth.fullquiz.feature.home.component.HomeQuizCard
+import com.hiearth.fullquiz.feature.home.component.HomeRankingCard
 import com.hiearth.fullquiz.feature.home.model.HomeUiState
 
 @Composable
@@ -33,81 +44,93 @@ internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    var userName by remember { mutableStateOf("") }
+    var userName by remember { mutableStateOf("init") }
+    val scrollState = rememberScrollState()
 
     HomeScreen(
         padding = padding,
         uiState = uiState.value,
-        searchUser = viewModel::searchUser,
         userName = userName,
-        changeUserName = { userName = it }
+        scrollState = scrollState,
     )
 }
 
 @Composable
 private fun HomeScreen(
     padding: PaddingValues,
-    uiState: HomeUiState,
-    userName: String,
-    changeUserName: (String) -> Unit,
-    searchUser: (userName: String) -> Unit
+    uiState: HomeUiState = HomeUiState.Init,
+    userName: String = "지구모아",
+    currentStep: Int = 0,
+    scrollState: ScrollState = rememberScrollState(),
+    navigateQuiz: () -> Unit = {},
+    navigateRanking: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .padding(padding)
-            .padding(16.dp)
-            .fillMaxSize(),
+            .padding(top = 24.dp, start = 24.dp, end = 24.dp)
+            .fillMaxSize()
+            .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-
-        Text(
-            text = "유저 검색",
-            style = MaterialTheme.typography.headlineSmall
-        )
-
-        OutlinedTextField(
-            value = userName,
-            onValueChange = changeUserName,
-            label = { Text("이름 입력") },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Button(
-            onClick = { searchUser(userName) },
-            modifier = Modifier.align(Alignment.End)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
         ) {
-            Text("검색")
+            Icon(
+                painter = painterResource(R.drawable.ic_title),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            TitleText(userName = userName)
         }
-
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-
-        when (uiState) {
-            HomeUiState.Init ->{
-                Box(modifier = Modifier.fillMaxSize())
-            }
-
-            is HomeUiState.Loading -> {
-                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(modifier = Modifier.size(40.dp))
-                }
-            }
-
-            is HomeUiState.Success -> {
-                Text(
-                    text = "이름: ${uiState.user.name}\nID: ${uiState.user.id}",
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-
-            is HomeUiState.Failure -> {
-                Text(
-                    text = "유저 정보를 불러오지 못했습니다.",
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "나의 현황",
+            style = MaterialTheme.typography.displayMedium.copy(
+                color = AppColors.Black,
+            ),
+        )
+        HomeQuizCard(
+            currentStep = currentStep,
+            navigateQuiz = navigateQuiz
+        )
+        Text(
+            text = "나의 랭킹 순위는?",
+            style = MaterialTheme.typography.displayMedium.copy(
+                color = AppColors.Black,
+            ),
+        )
+        HomeRankingCard(
+            navigateRanking = navigateRanking
+        )
     }
+}
+
+@Composable
+private fun TitleText(
+    userName: String
+) {
+    Text(
+        buildAnnotatedString {
+            withStyle(style = SpanStyle(color = MaterialTheme.colorScheme.primary)) {
+                append(userName)
+            }
+            withStyle(style = SpanStyle(color = AppColors.Black)) {
+                append(stringResource(R.string.string_hi))
+            }
+        },
+        style = MaterialTheme.typography.displayMedium
+    )
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF6F6F6)
+@Composable
+private fun HomeScreenPreview() {
+    HomeScreen(
+        padding = PaddingValues(0.dp),
+    )
 }
