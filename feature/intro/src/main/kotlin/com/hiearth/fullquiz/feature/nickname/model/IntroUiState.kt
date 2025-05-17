@@ -1,10 +1,18 @@
 package com.hiearth.fullquiz.feature.nickname.model
 
+import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.core.model.User
 
-sealed class IntroUiState () {
+sealed class IntroUiState() {
     data object Init : IntroUiState()
-    data object Loading : IntroUiState()
-    data class Success(val user: User) : IntroUiState()
+    data object Logined : IntroUiState()
+    data class Join(
+        val user: User = User(0,""),
+        val interests: Interests? = null,
+        val validCheckType: CheckType = CheckType.DUPLICATE_CHECK,
+        val isNameSet: Boolean = false
+    ) : IntroUiState()
+
     data class Failure(val throwable: Throwable) : IntroUiState()
 }
+

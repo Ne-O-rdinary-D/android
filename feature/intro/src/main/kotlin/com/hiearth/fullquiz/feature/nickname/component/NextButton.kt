@@ -8,7 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hiearth.fullquiz.core.designsystem.theme.MainGreen
 
 @Composable
 internal fun NextButton(
@@ -19,9 +21,15 @@ internal fun NextButton(
     Button(
         onClick = { onClick() },
         modifier = modifier.height(60.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+        colors = ButtonDefaults.buttonColors(containerColor = MainGreen),
         shape = RoundedCornerShape(9.dp),
     ) {
         Text(text, color = Color.White)
     }
+}
+
+@Composable
+@Preview
+private fun NextButtonPrev(){
+    NextButton(text = "다음") { }
 }
