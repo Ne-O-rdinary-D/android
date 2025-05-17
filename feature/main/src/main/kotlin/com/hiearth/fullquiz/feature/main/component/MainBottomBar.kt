@@ -29,7 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.hiearth.fullquiz.core.designsystem.theme.ComposeBaseProjectTheme
+import com.hiearth.fullquiz.core.designsystem.theme.FullQuizTheme
 import com.hiearth.fullquiz.feature.main.MainTab
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
@@ -110,7 +110,7 @@ private fun RowScope.MainBottomBarItem(
 @Preview
 @Composable
 private fun MainBottomBarPreview() {
-    ComposeBaseProjectTheme() {
+    FullQuizTheme() {
         MainBottomBar(
             visible = true,
             tabs = MainTab.entries.toPersistentList(),

@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.fullquiz.android.application)
     alias(libs.plugins.fullquiz.android.compose)

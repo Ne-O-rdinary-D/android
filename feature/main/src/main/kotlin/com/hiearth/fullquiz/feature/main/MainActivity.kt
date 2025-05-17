@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import com.hiearth.fullquiz.core.designsystem.theme.ComposeBaseProjectTheme
+import com.hiearth.fullquiz.core.designsystem.theme.FullQuizTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navigator: MainNavigator = rememberMainNavigator()
 
-            ComposeBaseProjectTheme {
+            FullQuizTheme {
                 MainScreen(
                     navigator = navigator,
                 )
