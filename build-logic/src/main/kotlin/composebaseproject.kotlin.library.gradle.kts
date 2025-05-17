@@ -8,4 +8,3 @@ plugins {
 }
 
 configureKotlin()
-configureJUnitAndroid()

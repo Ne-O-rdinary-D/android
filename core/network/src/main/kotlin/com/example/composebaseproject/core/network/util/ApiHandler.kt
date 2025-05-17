@@ -1,5 +1,6 @@
 package com.example.composebaseproject.core.network.util
 
+import android.util.Log
 import com.example.composebaseproject.core.network.model.ApiResponse
 import com.example.composebaseproject.core.network.model.ErrorResponse
 import kotlinx.serialization.SerializationException
@@ -30,6 +31,8 @@ suspend fun <T> runRemote(block: suspend() -> Response<T>): ApiResponse<T> {
             } catch (e: SerializationException) {
                 "서버 오류"
             }
+
+            Log.e("RetrofitError", "${response.code()} : ${response.message()}")
 
             ApiResponse.Failure.HttpError(
                 code = response.code(),
