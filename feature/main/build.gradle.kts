@@ -8,5 +8,6 @@ setNamespace("feature.main")
 
 dependencies {
     implementation(projects.feature.home)
+    implementation(projects.feature.nickname)
     implementation(libs.kotlinx.immutable)
 }
