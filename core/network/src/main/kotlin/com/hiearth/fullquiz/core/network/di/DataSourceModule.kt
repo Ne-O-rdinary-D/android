@@ -1,6 +1,8 @@
 package com.hiearth.fullquiz.core.network.di
 
+import com.hiearth.fullquiz.core.network.datasource.QuizDataSource
 import com.hiearth.fullquiz.core.network.datasource.UserDataSource
+import com.hiearth.fullquiz.core.network.retrofit.FakeQuizDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeUserDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitUserDataSource
 import dagger.Binds
@@ -26,6 +28,12 @@ internal abstract class DataSourceModule {
         fakeUserDataSource: FakeUserDataSource
     ): UserDataSource
 
+    @Binds
+    @FakeQuiz
+    abstract fun bindFakeQuizDataSource(
+        fakeQuizDataSource: FakeQuizDataSource
+    ): QuizDataSource
+
 }
 
 @Qualifier
@@ -35,3 +43,7 @@ annotation class RealUserDataSource
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class FakeDataSource
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class FakeQuiz

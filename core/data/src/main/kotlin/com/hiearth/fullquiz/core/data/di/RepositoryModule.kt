@@ -1,5 +1,7 @@
 package com.hiearth.fullquiz.core.data.di
 
+import com.hiearth.fullquiz.core.data.QuizRepository
+import com.hiearth.fullquiz.core.data.QuizRepositoryImpl
 import com.hiearth.fullquiz.core.data.UserRepository
 import com.hiearth.fullquiz.core.data.UserRepositoryImpl
 import dagger.Binds
@@ -15,5 +17,10 @@ internal abstract class RepositoryModule {
     abstract fun bindUserRepository(
         userRepository: UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    abstract fun bindQuizRepository(
+        quizRepository: QuizRepositoryImpl
+    ): QuizRepository
 
 }

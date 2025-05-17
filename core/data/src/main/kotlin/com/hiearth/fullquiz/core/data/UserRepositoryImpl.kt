@@ -1,18 +1,27 @@
 package com.hiearth.fullquiz.core.data
 
-import com.hiearth.fullquiz.core.data.mapper.toResult
-import com.hiearth.fullquiz.core.data.mapper.toUser
-import com.hiearth.fullquiz.core.model.User
-import com.hiearth.fullquiz.core.network.datasource.UserDataSource
-import com.hiearth.fullquiz.core.network.di.FakeDataSource
+import com.hiearth.fullquiz.core.local.datasource.PreferenceDataSource
+import com.hiearth.fullquiz.core.model.Interests
 import javax.inject.Inject
 
 internal class UserRepositoryImpl @Inject constructor(
-    @FakeDataSource private val userDataSource: UserDataSource
+    private val preferenceDataSource: PreferenceDataSource,
 ) : UserRepository {
-    override suspend fun searchUser(gymName: String): Result<User> {
-        return userDataSource.searchUser(gymName).toResult(
-            transform = { it.toUser() }
-        )
+
+    override fun setUser(nickName: String, interest: Interests) {
+        preferenceDataSource.setNickname(nickName)
+        preferenceDataSource.setInterest(interest)
+    }
+
+    override fun getNickname(): String {
+        return preferenceDataSource.getNickname()
+    }
+
+    override fun getInterest(): Interests {
+        return preferenceDataSource.getInterest()
+    }
+
+    override fun clearAll() {
+        preferenceDataSource.clearAll()
     }
 }

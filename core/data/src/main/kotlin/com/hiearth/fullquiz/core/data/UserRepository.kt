@@ -1,7 +1,11 @@
 package com.hiearth.fullquiz.core.data
 
+import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.core.model.User
 
 interface UserRepository {
-    suspend fun searchUser(gymName: String): Result<User>
+    fun setUser(nickName: String, interest: Interests)
+    fun getNickname(): String
+    fun getInterest(): Interests
+    fun clearAll()
 }

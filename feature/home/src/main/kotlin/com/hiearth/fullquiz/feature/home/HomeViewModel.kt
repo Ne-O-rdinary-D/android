@@ -17,13 +17,6 @@ class HomeViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Init)
     val uiState: StateFlow<HomeUiState> = _uiState
 
-    fun searchUser(userName: String) {
-        viewModelScope.launch {
-            _uiState.value = HomeUiState.Loading
-            userRepository.searchUser(userName)
-                .onSuccess { _uiState.value = HomeUiState.Success(it) }
-                .onFailure { _uiState.value = HomeUiState.Failure(it) }
-        }
-    }
+
 
 }
