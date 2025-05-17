@@ -56,8 +56,8 @@ class MainNavigator(
         }
     }
 
-    fun navigateQuiz() {
-        navController.navigateQuiz(singleTopOptions)
+    fun navigateQuiz(quizCategory: String = "재활용의 여정") {
+        navController.navigateQuiz(singleTopOptions, quizCategory)
     }
 
     private fun popBackStack() {

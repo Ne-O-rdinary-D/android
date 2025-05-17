@@ -47,7 +47,8 @@ internal fun QuizRoute(
     padding: PaddingValues,
     viewModel: QuizViewModel = hiltViewModel(),
     navigateHome: () -> Unit,
-    navigateRanking: () -> Unit
+    navigateRanking: () -> Unit,
+    quizCategory: String
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var currentStep by remember { mutableStateOf(0) }

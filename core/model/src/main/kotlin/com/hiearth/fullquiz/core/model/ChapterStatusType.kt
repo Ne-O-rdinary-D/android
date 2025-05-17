@@ -1,4 +1,4 @@
-package com.hiearth.fullquiz.feature.my.model
+package com.hiearth.fullquiz.core.model
 
 enum class ChapterStatusType {
     NOT_STARTED,
