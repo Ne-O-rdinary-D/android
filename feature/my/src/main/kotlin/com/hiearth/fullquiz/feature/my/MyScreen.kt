@@ -20,20 +20,23 @@ import com.hiearth.fullquiz.feature.my.model.MyUiState
 @Composable
 fun MyRoute(
     padding: PaddingValues,
-    viewModel: MyViewModel = hiltViewModel()
+    viewModel: MyViewModel = hiltViewModel(),
+    navigateQuiz: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     MyScreen(
         padding,
-        uiState.value
+        uiState.value,
+        navigateQuiz = navigateQuiz
     )
 }
 
 @Composable
 private fun MyScreen(
     padding: PaddingValues,
-    uiState: MyUiState
+    uiState: MyUiState,
+    navigateQuiz: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -52,7 +55,7 @@ private fun MyScreen(
                 Spacer(modifier = Modifier.height(40.dp))
 
                 uiState.chapterStatusList.forEach {
-                    ChapterStatusList(it)
+                    ChapterStatusList(it, navigateQuiz)
                     Spacer(Modifier.height(24.dp))
                 }
             }
