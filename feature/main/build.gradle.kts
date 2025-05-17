@@ -10,4 +10,5 @@ dependencies {
     implementation(projects.feature.home)
     implementation(projects.feature.intro)
     implementation(libs.kotlinx.immutable)
+    implementation(projects.feature.rank)
 }

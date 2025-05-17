@@ -22,7 +22,7 @@ internal fun NextButton(
         onClick = { onClick() },
         modifier = modifier.height(60.dp),
         colors = ButtonDefaults.buttonColors(containerColor = MainGreen),
-        shape = RoundedCornerShape(9.dp),
+        shape = RoundedCornerShape(12.dp),
     ) {
         Text(text, color = Color.White)
     }

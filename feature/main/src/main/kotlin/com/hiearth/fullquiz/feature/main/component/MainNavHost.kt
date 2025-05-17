@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import com.hiearth.fullquiz.feature.home.navigation.homeNavGraph
 import com.hiearth.fullquiz.feature.main.MainNavigator
 import com.hiearth.fullquiz.feature.main.MainTab
 import com.hiearth.fullquiz.feature.nickname.navigation.introNavGraph
+import com.hiearth.fullquiz.feature.rank.navigation.rankNavGraph
 
 @Composable
 internal fun MainNavHost(
@@ -29,12 +30,16 @@ internal fun MainNavHost(
             navController = navigator.navController,
             startDestination = navigator.startDestination,
         ) {
-//            homeNavGraph(
-//                padding = padding
-//            )
+            homeNavGraph(
+                padding = padding
+            )
             introNavGraph(
                 padding = padding,
-                navigateToHome = {navigator.navigate(MainTab.HOME)}
+                navigateToHome = { navigator.navigate(MainTab.HOME) }
+            )
+
+            rankNavGraph(
+                padding = padding
             )
         }
     }

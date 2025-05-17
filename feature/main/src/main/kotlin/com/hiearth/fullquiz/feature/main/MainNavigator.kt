@@ -12,6 +12,7 @@ import androidx.navigation.navOptions
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 import com.hiearth.fullquiz.feature.home.navigation.navigateHome
+import com.hiearth.fullquiz.feature.rank.navigation.navigateRank
 
 class MainNavigator(
     val navController: NavHostController
@@ -19,7 +20,7 @@ class MainNavigator(
     private val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    val startDestination: Route = Route.IntroScreenRoute
+    val startDestination: Route = MainTab.HOME.route
 
     val currentTab: MainTab?
         @Composable get() = MainTab.find { tab ->
@@ -42,7 +43,7 @@ class MainNavigator(
 
         when (tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
-            MainTab.RANKING -> TODO()
+            MainTab.RANKING -> navController.navigateRank(navOptions)
             MainTab.MY -> TODO()
         }
     }
