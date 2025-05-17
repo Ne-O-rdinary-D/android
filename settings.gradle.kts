@@ -23,14 +23,17 @@ dependencyResolutionManagement {
 
 rootProject.name = "FullQuiz"
 include(":app")
+
 include(":feature:main")
-include(":core:designsystem")
-include(":core:navigation")
 include(":feature:home")
+include(":feature:intro")
+include(":feature:quiz")
+include(":feature:rank")
+include(":feature:my")
+
+include(":core:local")
 include(":core:network")
 include(":core:model")
 include(":core:data")
-include(":feature:intro")
-include(":core:local")
-include(":feature:rank")
-include(":feature:my")
+include(":core:designsystem")
+include(":core:navigation")

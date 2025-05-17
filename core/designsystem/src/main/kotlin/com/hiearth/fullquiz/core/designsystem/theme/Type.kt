@@ -27,6 +27,11 @@ val Typography = Typography(
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
     ),
+    titleLarge = TextStyle( // Header 3
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Bold,
+        fontSize = 40.sp
+    ),
     titleMedium = TextStyle( // Subtitle1
         fontFamily = Pretendard,
         fontWeight = FontWeight.SemiBold,

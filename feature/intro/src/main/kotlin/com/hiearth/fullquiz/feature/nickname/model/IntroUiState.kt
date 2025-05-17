@@ -7,7 +7,7 @@ sealed class IntroUiState() {
     data object Init : IntroUiState()
     data object Logined : IntroUiState()
     data class Join(
-        val user: User = User(0,""),
+        val nickName: String = "",
         val interests: Interests? = null,
         val validCheckType: ValidCheckType = ValidCheckType.DUPLICATE_CHECK,
         val isNameSet: Boolean = false

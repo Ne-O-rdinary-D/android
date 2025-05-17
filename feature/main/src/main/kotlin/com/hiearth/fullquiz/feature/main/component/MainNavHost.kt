@@ -13,6 +13,7 @@ import com.hiearth.fullquiz.feature.main.MainNavigator
 import com.hiearth.fullquiz.feature.main.MainTab
 import com.hiearth.fullquiz.feature.my.navigation.myNavGraph
 import com.hiearth.fullquiz.feature.nickname.navigation.introNavGraph
+import com.hiearth.fullquiz.feature.quiz.navigation.quizNavGraph
 import com.hiearth.fullquiz.feature.rank.navigation.rankNavGraph
 
 @Composable
@@ -37,7 +38,12 @@ internal fun MainNavHost(
             )
             introNavGraph(
                 padding = padding,
-                navigateToHome = { navigator.navigate(MainTab.HOME) }
+                navigateQuiz = navigator::navigateQuiz
+            )
+            quizNavGraph(
+                padding = padding,
+                navigateHome = { navigator.navigate(MainTab.HOME) },
+                navigateRanking = { navigator.navigate(MainTab.RANKING) }
             )
 
             rankNavGraph(

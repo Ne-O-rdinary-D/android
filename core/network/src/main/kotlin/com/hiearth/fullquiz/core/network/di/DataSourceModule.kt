@@ -1,8 +1,10 @@
 package com.hiearth.fullquiz.core.network.di
 
 import com.hiearth.fullquiz.core.network.datasource.MyDataSource
+import com.hiearth.fullquiz.core.network.datasource.QuizDataSource
 import com.hiearth.fullquiz.core.network.datasource.RankDataSource
 import com.hiearth.fullquiz.core.network.datasource.UserDataSource
+import com.hiearth.fullquiz.core.network.retrofit.FakeQuizDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeUserDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitMyDataSource
@@ -13,6 +15,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
+
 
 // 단순히 구현체 - interface 연결이면 Binds 사용
 @Module
@@ -34,7 +37,7 @@ internal abstract class DataSourceModule {
     @Binds
     @RealUserDataSource
     abstract fun bindRankDataSource(
-       retrofitRankDataSource: RetrofitRankDataSource
+        retrofitRankDataSource: RetrofitRankDataSource
     ): RankDataSource
 
     @Binds
@@ -48,6 +51,13 @@ internal abstract class DataSourceModule {
     abstract fun bindMyDataSource(
         retrofitMyDataSource: RetrofitMyDataSource
     ): MyDataSource
+
+    @Binds
+    @FakeQuiz
+    abstract fun bindFakeQuizDataSource(
+        fakeQuizDataSource: FakeQuizDataSource
+    ): QuizDataSource
+
 }
 
 @Qualifier
@@ -57,3 +67,7 @@ annotation class RealUserDataSource
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class FakeDataSource
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class FakeQuiz

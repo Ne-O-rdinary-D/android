@@ -8,12 +8,12 @@ import com.hiearth.fullquiz.feature.nickname.IntroRoute
 
 fun NavGraphBuilder.introNavGraph(
     padding: PaddingValues,
-    navigateToHome: () -> Unit
+    navigateQuiz: () -> Unit
 ) {
     composable<Route.IntroScreenRoute> {
         IntroRoute(
             padding = padding,
-            navigateToHome = navigateToHome
+            navigateQuiz = navigateQuiz
         )
     }
 }

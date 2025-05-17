@@ -33,7 +33,7 @@ import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 internal fun IntroRoute(
     padding: PaddingValues,
     viewModel: IntroViewModel = hiltViewModel(),
-    navigateToHome: () -> Unit
+    navigateQuiz: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -45,20 +45,20 @@ internal fun IntroRoute(
     IntroScreen(
         padding = padding,
         uiState = uiState.value,
+        setUser = viewModel::setUser,
         onNicknameChange = { viewModel.onNicknameChanged(nickname = it) },
         onPageMove = {
-            viewModel.onPageMove()
+                viewModel.onPageMove()
         },
         onSelectInterest = {
             viewModel.onInterestChanged(it)
-
         },
-        onJoin = {
+        navigateQuiz = {
             (uiState.value as? IntroUiState.Join)?.let {
-                if (it.interests != null) navigateToHome()
+                if (it.interests != null) navigateQuiz()
             }
         },
-        onValidNickname = { viewModel.onValidCheck() }
+        onValidNickname = { viewModel.onValidCheck() },
     )
 }
 
@@ -66,11 +66,12 @@ internal fun IntroRoute(
 private fun IntroScreen(
     padding: PaddingValues,
     uiState: IntroUiState,
+    setUser: () -> Unit,
     onNicknameChange: (String) -> Unit,
     onPageMove: () -> Unit,
     onSelectInterest: (Interests) -> Unit,
-    onJoin: () -> Unit,
-    onValidNickname: () -> Unit
+    onValidNickname: () -> Unit,
+    navigateQuiz: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -112,7 +113,10 @@ private fun IntroScreen(
                         text = if (uiState.isNameSet) "입장하기" else "다음",
                         onClick = {
                             if (!(uiState.isNameSet)) onPageMove()
-                            else onJoin()
+                            else {
+                                setUser()
+                                navigateQuiz()
+                            }
                         }
                     )
                 }
