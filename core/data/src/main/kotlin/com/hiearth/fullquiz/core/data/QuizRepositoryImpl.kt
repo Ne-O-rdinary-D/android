@@ -27,4 +27,12 @@ class QuizRepositoryImpl @Inject constructor(
             transform = { it.data.quizResponses.map { quiz -> quiz.toQuiz() } }
         )
     }
+
+    override suspend fun getQuizList(category: String): Result<List<Quiz>> {
+        val nickName = userRepository.getNickname()
+
+        return quizDataSource.getQuizList(nickName, category).toResult(
+            transform = { it.data.quizResponses.map { quiz -> quiz.toQuiz() } }
+        )
+    }
 }
