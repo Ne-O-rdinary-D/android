@@ -87,7 +87,7 @@ private fun HomeScreen(
                 tint = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.width(8.dp))
-            TitleText(userName = userName)
+            TitleText(userName = if(uiState is HomeUiState.Success) uiState.nickname else userName)
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(

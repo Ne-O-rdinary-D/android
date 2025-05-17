@@ -11,4 +11,7 @@ interface PreferenceDataSource {
     fun getInterest(): Interests
 
     fun clearAll()
+
+    fun setProgressIdList(progressList: List<Pair<String, Int>>)
+    fun getProgressIdList(): List<Pair<String, Int>>
 }

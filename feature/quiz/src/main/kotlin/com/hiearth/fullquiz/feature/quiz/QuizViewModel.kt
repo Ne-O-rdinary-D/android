@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val quizRepository: QuizRepository
+    private val quizRepository: QuizRepository,
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<QuizUiState> = MutableStateFlow(QuizUiState.Loading)
     val uiState: StateFlow<QuizUiState> = _uiState
@@ -56,11 +56,14 @@ class QuizViewModel @Inject constructor(
 
     fun getQuizList() {
         viewModelScope.launch {
+            val progressList = userRepository.getProgressIdList()
             quizRepository.getQuizList().onSuccess {
                 _uiState.value = QuizUiState.Success(
                     quizList = it,
                     interests = userRepository.getInterest()
                 )
+
+                userRepository.setProgressIdList(progressList)
             }.onFailure {
                 _uiState.value = QuizUiState.Failure(it)
             }
