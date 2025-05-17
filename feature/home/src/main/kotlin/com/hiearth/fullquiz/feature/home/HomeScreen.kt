@@ -45,7 +45,7 @@ internal fun HomeRoute(
     navigateRanking: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
-    var userName by remember { mutableStateOf("init") }
+    val userName = viewModel.nickName
     val scrollState = rememberScrollState()
 
     HomeScreen(

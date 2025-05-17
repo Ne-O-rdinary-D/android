@@ -31,22 +31,16 @@ class MainNavigator(
         }
 
     private val singleTopOptions = navOptions {
-        launchSingleTop = true
+        launchSingleTop = false
         restoreState = true
     }
 
     fun navigate(tab: MainTab) {
         val navOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
-                // 홈 -> 검색 -> 홈 다시 눌렀을 때, 홈 탭의 스크롤 상태 등을 유지
-                saveState = true
-                // 목적지 자체는 제거하지 않음
-//                inclusive = false
+                inclusive = true  // -> Intro/Quiz 백스택에서 제거됨
             }
-            // 현재 화면이 같은 목적지면 다시 push하지 않음
             launchSingleTop = true
-            // 백스택에서 제거했던 화면의 상태를 복원할지 여부
-            restoreState = true
         }
 
         when (tab) {
