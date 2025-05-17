@@ -26,7 +26,7 @@ class RankViewModel @Inject constructor(
         }
 
         val nickname = userRepository.getNickname()
-        rankRepository.getRankData(nickname.ifEmpty { "d" }).onSuccess {
+        rankRepository.getRankData(nickname.ifEmpty { "테스터" }).onSuccess {
             val myRankData = it.first
             val rankList = it.second
             _uiState.update {

@@ -3,9 +3,7 @@ package com.hiearth.fullquiz.feature.my.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,15 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hiearth.fullquiz.core.model.Category
+import com.hiearth.fullquiz.core.model.ChapterStatusType
 import com.hiearth.fullquiz.feature.my.R
-import com.hiearth.fullquiz.feature.my.model.ChapterStatusData
-import com.hiearth.fullquiz.feature.my.model.ChapterStatusType
 
 @Composable
 fun ChapterStatusList(
-    chapterStatusData: ChapterStatusData,
+    chapterStatusData: Category,
     navigateChapter: () -> Unit
 ) {
     Column(
@@ -46,7 +43,7 @@ fun ChapterStatusList(
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            items(chapterStatusData.chapterStatusList) { status ->
+            items(chapterStatusData.list) { status ->
                 ChapterStatusBox(status, navigateChapter = navigateChapter)
             }
         }
@@ -56,11 +53,10 @@ fun ChapterStatusList(
 
 @Composable
 fun ChapterStatusBox(
-    status: ChapterStatusType,
-    title: String = "재활용 여정",
+    detailCategory: Category.DetailCategory,
     navigateChapter: () -> Unit
 ) {
-    val icon = when (status) {
+    val icon = when (detailCategory.status) {
         ChapterStatusType.COMPLETE -> painterResource(R.drawable.ic_completed)
         ChapterStatusType.NOT_STARTED -> painterResource(R.drawable.ic_not_started)
         ChapterStatusType.IN_PROGRESS -> painterResource(R.drawable.ic_in_progress)
@@ -88,7 +84,7 @@ fun ChapterStatusBox(
         Spacer(Modifier.height(24.dp))
 
         Text(
-            text = title,
+            text = detailCategory.categoryName,
             color = Color.Black,
             style = MaterialTheme.typography.bodyLarge
         )
@@ -96,16 +92,9 @@ fun ChapterStatusBox(
 }
 
 
-private fun getTitleString(chapterStatusData: ChapterStatusData): String {
+private fun getTitleString(chapterStatusData: Category): String {
     val completedCount =
-        chapterStatusData.chapterStatusList.count { it == ChapterStatusType.COMPLETE }
-    val totalCount = chapterStatusData.chapterStatusList.size
-    return "${chapterStatusData.type.displayName} ($completedCount/$totalCount)"
-}
-
-
-@Preview
-@Composable
-private fun ChapterStatusBoxPrev() {
-    ChapterStatusBox(status = ChapterStatusType.COMPLETE){}
+        chapterStatusData.list.count { it.status == ChapterStatusType.COMPLETE }
+    val totalCount = chapterStatusData.list.size
+    return "${chapterStatusData.bigCategory.displayName} ($completedCount/$totalCount)"
 }

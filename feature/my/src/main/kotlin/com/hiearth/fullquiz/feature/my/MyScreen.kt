@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,6 +26,10 @@ fun MyRoute(
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(Unit) {
+        viewModel.getMyStatus()
+    }
+
     MyScreen(
         padding,
         uiState.value,
@@ -38,6 +43,8 @@ private fun MyScreen(
     uiState: MyUiState,
     navigateQuiz: () -> Unit
 ) {
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()

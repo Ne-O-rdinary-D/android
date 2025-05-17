@@ -1,6 +1,7 @@
 package com.hiearth.fullquiz.core.network.di
 
 import com.hiearth.fullquiz.core.network.MyApi
+import com.hiearth.fullquiz.core.network.QuizMyApi
 import com.hiearth.fullquiz.core.network.RankApi
 import com.hiearth.fullquiz.core.network.UserApi
 import dagger.Module
@@ -67,4 +68,8 @@ internal object NetworkModule {
     @Provides
     fun provideMyApi(retrofit: Retrofit): MyApi =
         retrofit.create(MyApi::class.java)
+
+    @Provides
+    fun provideQuizMyApi(retrofit: Retrofit): QuizMyApi =
+        retrofit.create(QuizMyApi::class.java)
 }
