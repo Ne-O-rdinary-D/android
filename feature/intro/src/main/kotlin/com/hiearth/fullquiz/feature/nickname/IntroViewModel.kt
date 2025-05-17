@@ -23,8 +23,7 @@ class IntroViewModel @Inject constructor(
     val uiState: StateFlow<IntroUiState> = _uiState
 
     fun getLoginState() = viewModelScope.launch {
-        userRepository.clearAll()
-        delay(3000)
+        delay(1500)
         if (userRepository.getNickname().isNotEmpty()) {
             _uiState.update {
                 IntroUiState.Logined

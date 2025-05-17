@@ -27,4 +27,13 @@ class QuizRepositoryImpl @Inject constructor(
             transform = { it.data.quizResponses.map { quiz -> quiz.toQuiz() } }
         )
     }
+
+    override suspend fun postCurrentQuiz(
+        quizId: String,
+        isCorrect: Boolean,
+        userAnswer: String
+    ): Result<Unit> {
+        val nickName = userRepository.getNickname()
+        return quizDataSource.postCurrentQuiz(nickName, quizId, isCorrect, userAnswer).toResult()
+    }
 }
