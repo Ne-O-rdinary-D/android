@@ -27,12 +27,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hiearth.fullquiz.feature.nickname.component.NextButton
 import com.hiearth.fullquiz.feature.nickname.model.CheckType
-import com.hiearth.fullquiz.feature.nickname.model.NicknameUiState
+import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 
 @Composable
 internal fun IntroRoute(
     padding: PaddingValues,
-    viewModel: NicknameViewModel = hiltViewModel()
+    viewModel: IntroViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -51,7 +51,7 @@ internal fun IntroRoute(
 @Composable
 private fun IntroScreen(
     padding: PaddingValues,
-    uiState: NicknameUiState,
+    uiState: IntroUiState,
     nickname: String,
     onNicknameChange: (String) -> Unit,
     checkRedundancy: CheckType
