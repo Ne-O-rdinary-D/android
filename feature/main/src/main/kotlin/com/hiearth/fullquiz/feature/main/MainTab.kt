@@ -11,10 +11,20 @@ internal enum class MainTab(
     internal val contentDescription: String,
     val route: MainTabRoute
 ) {
+    RANKING(
+        iconResId = R.drawable.ic_ranking,
+        contentDescription = "랭킹",
+        route = MainTabRoute.Ranking,
+    ),
     HOME(
         iconResId = R.drawable.ic_home,
-        contentDescription = "Home",
+        contentDescription = "홈",
         route = MainTabRoute.Home,
+    ),
+    MY(
+        iconResId = R.drawable.ic_my,
+        contentDescription = "마이",
+        route = MainTabRoute.My,
     );
 
     companion object {

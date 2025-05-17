@@ -1,5 +1,6 @@
 package com.hiearth.fullquiz.feature.main
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -64,8 +65,8 @@ private fun MainScreenContent(
         bottomBar = {
             MainBottomBar(
                 modifier = Modifier
-                    .navigationBarsPadding()
-                    .padding(start = 8.dp, end = 8.dp, bottom = 28.dp),
+                    .fillMaxWidth()
+                    .navigationBarsPadding(), // ✅ 유지
                 visible = navigator.shouldShowBottomBar(),
                 tabs = MainTab.entries.toPersistentList(),
                 currentTab = navigator.currentTab,
