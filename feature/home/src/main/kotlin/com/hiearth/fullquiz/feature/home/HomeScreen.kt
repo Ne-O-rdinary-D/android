@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hiearth.fullquiz.core.designsystem.theme.AppColors
+import com.hiearth.fullquiz.feature.home.component.HomeQuizCard
+import com.hiearth.fullquiz.feature.home.component.HomeRankingCard
 import com.hiearth.fullquiz.feature.home.model.HomeUiState
 
 @Composable
@@ -48,10 +50,8 @@ internal fun HomeRoute(
     HomeScreen(
         padding = padding,
         uiState = uiState.value,
-        searchUser = viewModel::searchUser,
         userName = userName,
         scrollState = scrollState,
-        changeUserName = { userName = it }
     )
 }
 
@@ -60,9 +60,10 @@ private fun HomeScreen(
     padding: PaddingValues,
     uiState: HomeUiState = HomeUiState.Init,
     userName: String = "지구모아",
+    currentStep: Int = 0,
     scrollState: ScrollState = rememberScrollState(),
-    changeUserName: (String) -> Unit = {},
-    searchUser: (userName: String) -> Unit = {}
+    navigateQuiz: () -> Unit = {},
+    navigateRanking: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -86,14 +87,26 @@ private fun HomeScreen(
             Spacer(modifier = Modifier.width(8.dp))
             TitleText(userName = userName)
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "나의 현황",
             style = MaterialTheme.typography.displayMedium.copy(
                 color = AppColors.Black,
             ),
         )
-        HomeQuizCard()
+        HomeQuizCard(
+            currentStep = currentStep,
+            navigateQuiz = navigateQuiz
+        )
+        Text(
+            text = "나의 랭킹 순위는?",
+            style = MaterialTheme.typography.displayMedium.copy(
+                color = AppColors.Black,
+            ),
+        )
+        HomeRankingCard(
+            navigateRanking = navigateRanking
+        )
     }
 }
 
