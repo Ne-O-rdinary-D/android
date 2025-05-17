@@ -31,7 +31,8 @@ class MainNavigator(
         }
 
     private val singleTopOptions = navOptions {
-        launchSingleTop = true
+        launchSingleTop = false
+        restoreState = true
     }
 
     fun navigate(tab: MainTab) {

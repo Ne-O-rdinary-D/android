@@ -52,12 +52,13 @@ internal fun QuizRoute(
     quizCategory: String = ""
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var currentStep by remember { mutableStateOf(0) }
+    val currentStep by viewModel.currentStep.collectAsStateWithLifecycle()
     var isCompleted by remember { mutableStateOf<Boolean?>(null) }
 
     LaunchedEffect(Unit) {
-        if (quizCategory.isEmpty()) viewModel.getQuizList()
-        else viewModel.getQuizList(quizCategory)
+        viewModel.getQuizListOnce(
+            if (quizCategory.isEmpty()) null else quizCategory
+        )
     }
 
     if (isCompleted == null) {
@@ -92,7 +93,7 @@ internal fun QuizRoute(
                 quizList = (uiState as QuizUiState.Success).quizList,
                 interests = (uiState as QuizUiState.Success).interests,
                 currentStep = currentStep,
-                changeCurrentStep = { currentStep = it },
+                changeCurrentStep = viewModel::setCurrentStep,
                 selectAnswer = viewModel::selectAnswer,
                 getQuizComplete = viewModel::getQuizState,
                 closeQuiz = { isCompleted = viewModel.getQuizState() },

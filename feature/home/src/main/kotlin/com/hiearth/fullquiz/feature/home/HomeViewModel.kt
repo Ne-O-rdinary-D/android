@@ -17,6 +17,6 @@ class HomeViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Init)
     val uiState: StateFlow<HomeUiState> = _uiState
 
-
+    val nickName = userRepository.getNickname()
 
 }

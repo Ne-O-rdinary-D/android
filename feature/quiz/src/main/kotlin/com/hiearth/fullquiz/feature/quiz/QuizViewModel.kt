@@ -21,6 +21,23 @@ class QuizViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<QuizUiState> = MutableStateFlow(QuizUiState.Loading)
     val uiState: StateFlow<QuizUiState> = _uiState
 
+    private val _currentStep: MutableStateFlow<Int> = MutableStateFlow(0)
+    val currentStep: StateFlow<Int> = _currentStep
+
+    private var _initialized = false
+
+    fun getQuizListOnce(category: String?) {
+        if (_initialized) return
+        _initialized = true
+
+        if (category.isNullOrEmpty()) getQuizList()
+        else getQuizList(category)
+    }
+
+    fun setCurrentStep(step: Int) {
+        _currentStep.value = step
+    }
+
     fun selectAnswer(quizId: Int, answer: Answer) {
         var isCorrect = false
         var userAnswer = ""
@@ -57,10 +74,18 @@ class QuizViewModel @Inject constructor(
     fun getQuizList() {
         viewModelScope.launch {
             quizRepository.getQuizList().onSuccess {
+                var step = 0
+
                 _uiState.value = QuizUiState.Success(
                     quizList = it,
                     interests = userRepository.getInterest()
                 )
+
+                it.forEach {
+                    if (it.userAnswer != null) step++
+                }
+
+                _currentStep.value = step
             }.onFailure {
                 _uiState.value = QuizUiState.Failure(it)
             }
