@@ -38,7 +38,7 @@ fun RankRoute(
         padding = padding,
         uiState = uiState.value,
         reLoad = {
-            viewModel.reLoad()
+            viewModel.load()
         }
     )
 }

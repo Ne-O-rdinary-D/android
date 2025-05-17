@@ -25,7 +25,8 @@ class RankViewModel @Inject constructor(
             RankUiState.Loading
         }
 
-        rankRepository.getLoadPage().onSuccess {
+        val nickname = userRepository.getNickname()
+        rankRepository.getRankData(nickname.ifEmpty { "d" }).onSuccess {
             val myRankData = it.first
             val rankList = it.second
             _uiState.update {
@@ -35,21 +36,13 @@ class RankViewModel @Inject constructor(
                     rankList = rankList
                 )
             }
-        }
-    }
-
-    fun reLoad() = viewModelScope.launch {
-        val prev = uiState.value
-        _uiState.update {
-            RankUiState.Loading
-        }
-        if (prev is RankUiState.Success)
-            rankRepository.getRankList().onSuccess { list ->
-                _uiState.update {
-                    prev.copy(
-                        rankList = list
-                    )
-                }
+        }.onFailure { throwable->
+            throwable.printStackTrace()
+            _uiState.update {
+                RankUiState.Failure(
+                    throwable = throwable
+                )
             }
+        }
     }
 }

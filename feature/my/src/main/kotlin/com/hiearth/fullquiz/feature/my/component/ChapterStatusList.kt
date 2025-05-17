@@ -1,6 +1,7 @@
 package com.hiearth.fullquiz.feature.my.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,8 @@ import com.hiearth.fullquiz.feature.my.model.ChapterStatusType
 
 @Composable
 fun ChapterStatusList(
-    chapterStatusData: ChapterStatusData
+    chapterStatusData: ChapterStatusData,
+    navigateChapter: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -45,7 +47,7 @@ fun ChapterStatusList(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(chapterStatusData.chapterStatusList) { status ->
-                ChapterStatusBox(status)
+                ChapterStatusBox(status, navigateChapter = navigateChapter)
             }
         }
     }
@@ -55,7 +57,8 @@ fun ChapterStatusList(
 @Composable
 fun ChapterStatusBox(
     status: ChapterStatusType,
-    title: String = "재활용 여정"
+    title: String = "재활용 여정",
+    navigateChapter: () -> Unit
 ) {
     val icon = when (status) {
         ChapterStatusType.COMPLETE -> painterResource(R.drawable.ic_completed)
@@ -68,7 +71,8 @@ fun ChapterStatusBox(
             .width(130.dp)
             .height(130.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(Color.White),
+            .background(Color.White)
+            .clickable { navigateChapter() },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -103,5 +107,5 @@ private fun getTitleString(chapterStatusData: ChapterStatusData): String {
 @Preview
 @Composable
 private fun ChapterStatusBoxPrev() {
-    ChapterStatusBox(status = ChapterStatusType.COMPLETE)
+    ChapterStatusBox(status = ChapterStatusType.COMPLETE){}
 }

@@ -3,7 +3,6 @@ package com.hiearth.fullquiz.core.network.di
 import com.hiearth.fullquiz.core.network.MyApi
 import com.hiearth.fullquiz.core.network.RankApi
 import com.hiearth.fullquiz.core.network.UserApi
-import com.hiearth.fullquiz.core.network.datasource.RankDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -13,11 +13,13 @@ fun NavController.navigateMy(navOptions: NavOptions) {
 }
 
 fun NavGraphBuilder.myNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
+    navigateQuiz: () -> Unit
 ) {
     composable<MainTabRoute.My> {
         MyRoute(
-            padding = padding
+            padding = padding,
+            navigateQuiz = navigateQuiz
         )
     }
 }
