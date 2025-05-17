@@ -26,8 +26,12 @@ class QuizViewModel @Inject constructor(
     }
 
     fun selectAnswer(quizId: Int, answer: Answer) {
+        var isCorrect = false
+        var userAnswer = ""
         val quizList = (_uiState.value as QuizUiState.Success).quizList.map {
             if (it.quizId == quizId) {
+                isCorrect = it.answer == answer
+                userAnswer = answer.toString()
                 it.copy(userAnswer = answer)
             } else it
         }
@@ -35,6 +39,13 @@ class QuizViewModel @Inject constructor(
             QuizUiState.Success(
                 quizList = quizList,
                 interests = (_uiState.value as QuizUiState.Success).interests
+            )
+        }
+        viewModelScope.launch {
+            quizRepository.postCurrentQuiz(
+                quizId = quizId.toString(),
+                isCorrect = isCorrect,
+                userAnswer = userAnswer
             )
         }
     }
