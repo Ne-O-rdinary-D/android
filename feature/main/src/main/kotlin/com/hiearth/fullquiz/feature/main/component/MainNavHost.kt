@@ -17,7 +17,7 @@ import com.hiearth.fullquiz.feature.quiz.navigation.quizNavGraph
 import com.hiearth.fullquiz.feature.rank.navigation.rankNavGraph
 
 @Composable
-internal fun MainNavHost(
+fun MainNavHost(
     modifier: Modifier = Modifier,
     navigator: MainNavigator,
     padding: PaddingValues,
@@ -36,6 +36,7 @@ internal fun MainNavHost(
                 padding = padding,
                 navigateRanking = { navigator.navigate(MainTab.RANKING) }
             )
+
             introNavGraph(
                 padding = padding,
                 navigateQuiz = navigator::navigateQuiz,
@@ -49,7 +50,7 @@ internal fun MainNavHost(
             )
 
             rankNavGraph(
-                padding = padding
+                padding = padding,
             )
 
             myNavGraph(

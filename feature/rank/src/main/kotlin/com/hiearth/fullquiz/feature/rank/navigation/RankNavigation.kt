@@ -13,11 +13,11 @@ fun NavController.navigateRank(navOptions: NavOptions) {
 }
 
 fun NavGraphBuilder.rankNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
 ) {
     composable<MainTabRoute.Ranking> {
         RankRoute(
-            padding = padding
+            padding = padding,
         )
     }
 }
