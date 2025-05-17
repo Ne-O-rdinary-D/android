@@ -138,8 +138,8 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 ## precompiled plugins
-composebaseproject-android-application = { id = "composebaseproject.android.application", version = "unspecified" }
-composebaseproject-android-compose = { id = "composebaseproject.android.compose", version = "unspecified" }
-composebaseproject-android-feature = { id = "composebaseproject.android.feature", version = "unspecified" }
-composebaseproject-android-library = { id = "composebaseproject.android.library", version = "unspecified" }
-composebaseproject-kotlin-library = { id = "composebaseproject.kotlin.library", version = "unspecified" }
+fullquiz-android-application = { id = "fullquiz.android.application", version = "unspecified" }
+fullquiz-android-compose = { id = "fullquiz.android.compose", version = "unspecified" }
+fullquiz-android-feature = { id = "fullquiz.android.feature", version = "unspecified" }
+fullquiz-android-library = { id = "fullquiz.android.library", version = "unspecified" }
+fullquiz-kotlin-library = { id = "fullquiz.kotlin.library", version = "unspecified" }

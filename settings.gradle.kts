@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ComposeBaseProject"
+rootProject.name = "FullQuiz"
 include(":app")
 include(":feature:main")
 include(":core:designsystem")

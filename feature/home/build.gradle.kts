@@ -1,7 +1,7 @@
-import com.example.composebaseproject.setNamespace
+import com.hiearth.fullquiz.setNamespace
 
 plugins {
-    alias(libs.plugins.composebaseproject.android.feature)
+    alias(libs.plugins.fullquiz.android.feature)
 }
 
 setNamespace("feature.home")

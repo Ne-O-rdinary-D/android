@@ -1,8 +1,8 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import com.example.composebaseproject.setNamespace
+import com.hiearth.fullquiz.setNamespace
 
 plugins {
-    alias(libs.plugins.composebaseproject.android.library)
+    alias(libs.plugins.fullquiz.android.library)
     alias(libs.plugins.kotlin.serialization)
 }
 
