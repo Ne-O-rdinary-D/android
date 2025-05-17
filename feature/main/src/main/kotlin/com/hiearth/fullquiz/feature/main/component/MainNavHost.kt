@@ -38,7 +38,8 @@ internal fun MainNavHost(
             )
             introNavGraph(
                 padding = padding,
-                navigateQuiz = navigator::navigateQuiz
+                navigateQuiz = navigator::navigateQuiz,
+                navigateHome = {navigator.navigate(MainTab.HOME)}
             )
 
             quizNavGraph(
