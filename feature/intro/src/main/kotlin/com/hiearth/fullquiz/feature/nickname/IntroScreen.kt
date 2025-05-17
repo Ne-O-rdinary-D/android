@@ -48,6 +48,7 @@ internal fun IntroRoute(
     IntroScreen(
         padding = padding,
         uiState = uiState.value,
+        setUser = viewModel::setUser,
         onNicknameChange = { viewModel.onNicknameChanged(nickname = it) },
         onPageMove = {
                 viewModel.onPageMove()
@@ -55,8 +56,8 @@ internal fun IntroRoute(
         onSelectInterest = {
             viewModel.onInterestChanged(it)
         },
-        onJoin = { navigateQuiz() },
-        onValidNickname = { }
+        onValidNickname = { },
+        navigateQuiz = { navigateQuiz() }
     )
 }
 
@@ -64,11 +65,12 @@ internal fun IntroRoute(
 private fun IntroScreen(
     padding: PaddingValues,
     uiState: IntroUiState,
+    setUser: () -> Unit,
     onNicknameChange: (String) -> Unit,
     onPageMove: () -> Unit,
     onSelectInterest: (Interests) -> Unit,
-    onJoin: () -> Unit,
-    onValidNickname: () -> Unit
+    onValidNickname: () -> Unit,
+    navigateQuiz: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -110,7 +112,10 @@ private fun IntroScreen(
                         text = if (uiState.isNameSet) "입장하기" else "다음",
                         onClick = {
                             if (!(uiState.isNameSet)) onPageMove()
-                            else onJoin()
+                            else {
+                                setUser()
+                                navigateQuiz()
+                            }
                         }
                     )
                 }

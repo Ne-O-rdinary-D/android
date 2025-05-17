@@ -37,7 +37,7 @@ class IntroViewModel @Inject constructor(
         if (uiState.value is IntroUiState.Join) {
             _uiState.update { prev ->
                 (prev as IntroUiState.Join).copy(
-                    user = prev.user.copy(name = nickname)
+                    nickName = nickname
                 )
             }
         }
@@ -50,6 +50,13 @@ class IntroViewModel @Inject constructor(
                     interests = interests
                 )
             }
+        }
+    }
+
+    fun setUser() {
+        val request = uiState.value as IntroUiState.Join
+        if(request.nickName.isNotEmpty() && request.interests != null) {
+            userRepository.setUser(request.nickName, request.interests)
         }
     }
 

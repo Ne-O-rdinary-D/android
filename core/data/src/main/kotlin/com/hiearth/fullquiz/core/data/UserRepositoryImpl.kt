@@ -8,16 +8,13 @@ internal class UserRepositoryImpl @Inject constructor(
     private val preferenceDataSource: PreferenceDataSource,
 ) : UserRepository {
 
-    override fun setNickname(nickname: String) {
-        preferenceDataSource.setNickname(nickname)
+    override fun setUser(nickName: String, interest: Interests) {
+        preferenceDataSource.setNickname(nickName)
+        preferenceDataSource.setInterest(interest)
     }
 
     override fun getNickname(): String {
         return preferenceDataSource.getNickname()
-    }
-
-    override fun setInterest(interest: Interests) {
-        preferenceDataSource.setInterest(interest)
     }
 
     override fun getInterest(): Interests {

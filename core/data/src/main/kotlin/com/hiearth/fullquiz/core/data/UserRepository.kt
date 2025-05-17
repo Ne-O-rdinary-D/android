@@ -4,11 +4,8 @@ import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.core.model.User
 
 interface UserRepository {
-    fun setNickname(nickname: String)
+    fun setUser(nickName: String, interest: Interests)
     fun getNickname(): String
-
-    fun setInterest(interest: Interests)
     fun getInterest(): Interests
-
     fun clearAll()
 }
