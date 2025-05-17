@@ -8,5 +8,4 @@ plugins {
 setNamespace("feature.intro")
 dependencies {
     implementation(project(":core:local"))
-    implementation(project(":core:local"))
 }

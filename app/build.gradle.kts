@@ -32,4 +32,5 @@ android {
 
 dependencies {
     implementation(projects.feature.main)
+    implementation(project(":core:local"))
 }

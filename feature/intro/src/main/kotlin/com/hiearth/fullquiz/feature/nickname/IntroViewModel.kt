@@ -6,6 +6,7 @@ import com.hiearth.fullquiz.core.local.SharedPreferenceManager
 import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 
 
 class IntroViewModel : ViewModel() {
@@ -13,6 +14,13 @@ class IntroViewModel : ViewModel() {
     val uiState: StateFlow<IntroUiState> = _uiState
 
     fun getLoginState() {
-        SharedPreferenceManager.isLoggedIn()
+        _uiState.update{
+            IntroUiState.Loading
+        }
+        if(SharedPreferenceManager.isLoggedIn()){
+
+        } else {
+
+        }
     }
 }
