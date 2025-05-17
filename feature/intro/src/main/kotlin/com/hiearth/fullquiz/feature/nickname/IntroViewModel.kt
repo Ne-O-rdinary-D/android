@@ -1,5 +1,6 @@
 package com.hiearth.fullquiz.feature.nickname
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hiearth.fullquiz.core.data.UserRepository
@@ -59,8 +60,9 @@ class IntroViewModel @Inject constructor(
     fun setUser() {
         viewModelScope.launch {
             val request = uiState.value as IntroUiState.Join
+            val name = request.nickName
             if(request.nickName.isNotEmpty() && request.interests != null) {
-                userRepository.setUser(request.nickName, request.interests)
+                userRepository.setUser(name, request.interests)
             }
         }
     }

@@ -5,9 +5,9 @@ import com.hiearth.fullquiz.core.network.datasource.QuizDataSource
 import com.hiearth.fullquiz.core.network.datasource.QuizMyDataSource
 import com.hiearth.fullquiz.core.network.datasource.RankDataSource
 import com.hiearth.fullquiz.core.network.datasource.UserDataSource
-import com.hiearth.fullquiz.core.network.retrofit.FakeQuizDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitMyDataSource
+import com.hiearth.fullquiz.core.network.retrofit.RetrofitQuizDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitQuizMyDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitUserDataSource
@@ -47,9 +47,8 @@ internal abstract class DataSourceModule {
     ): MyDataSource
 
     @Binds
-    @FakeQuiz
-    abstract fun bindFakeQuizDataSource(
-        fakeQuizDataSource: FakeQuizDataSource
+    abstract fun bindQuizDataSource(
+        quizDataSource: RetrofitQuizDataSource
     ): QuizDataSource
 
 
