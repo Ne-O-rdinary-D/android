@@ -8,16 +8,20 @@ import androidx.navigation.compose.composable
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.feature.home.HomeRoute
 
-fun NavController.navigateHome(navOptions: NavOptions) {
+fun NavController.navigateHome(
+    navOptions: NavOptions
+) {
     navigate(MainTabRoute.Home, navOptions)
 }
 
 fun NavGraphBuilder.homeNavGraph(
-    padding: PaddingValues
+    padding: PaddingValues,
+    navigateRanking: () -> Unit
 ) {
     composable<MainTabRoute.Home> {
         HomeRoute(
-            padding = padding
+            padding = padding,
+            navigateRanking = navigateRanking
         )
     }
 }

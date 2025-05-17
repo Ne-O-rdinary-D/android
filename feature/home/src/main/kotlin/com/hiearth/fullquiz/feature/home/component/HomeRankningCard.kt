@@ -60,7 +60,7 @@ internal fun HomeRankingCard(
                 )
             ) {
                 Text(
-                    text = stringResource(R.string.string_continue_quiz),
+                    text = "랭킹 확인",
                     style = MaterialTheme.typography.titleMedium.copy(
                         color = AppColors.White,
                     ),
