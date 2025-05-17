@@ -53,7 +53,7 @@ fun SummaryBox(
             interfaceList.forEachIndexed { index, item ->
                 SummaryItem(
                     title = item.first,
-                    value = item.second.toString(),
+                    value = if (item.first == "현재 순위") item.second.toString() + "위" else item.second.toString(),
                     valueColor = if (item.first == "현재 순위") MainGreen else Color.Gray
                 )
                 if (index != interfaceList.lastIndex) {

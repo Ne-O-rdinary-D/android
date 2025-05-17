@@ -78,7 +78,7 @@ internal fun JoinScreen(
             Text(
                 text = checkRedundancy.type,
                 color = Color.Black,
-                style = Typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.wrapContentWidth().clickable{
                         onValidCheck()
                 }
@@ -89,6 +89,7 @@ internal fun JoinScreen(
         Divider(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(top = 4.dp)
                 .height(1.dp),
             color = Color.DarkGray
         )
