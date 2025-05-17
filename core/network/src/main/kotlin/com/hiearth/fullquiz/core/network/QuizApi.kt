@@ -1,7 +1,9 @@
 package com.hiearth.fullquiz.core.network
 
+import com.hiearth.fullquiz.core.network.model.request.QuizRequest
 import com.hiearth.fullquiz.core.network.model.response.QuizResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,4 +16,12 @@ interface QuizApi {
         @Query("nickname") nickname: String,
         @Query("category") category: String
     ): Response<QuizResponse>
+
+    @POST("/api/members/{memberId}/quizzes/{quizId}")
+    suspend fun postCurrentQuiz(
+        @Path("memberId") memberId: Int,
+        @Path("quizId") quizId: String,
+        @Query("nickname") nickname: String,
+        @Body params: QuizRequest
+    ): Response<Unit>
 }

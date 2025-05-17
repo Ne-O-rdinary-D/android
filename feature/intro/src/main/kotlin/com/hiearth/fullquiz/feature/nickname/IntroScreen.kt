@@ -42,6 +42,11 @@ internal fun IntroRoute(
         viewModel.getLoginState()
     }
 
+    LaunchedEffect(uiState.value) {
+        if(uiState.value is IntroUiState.Logined) navigateQuiz()
+    }
+
+
     IntroScreen(
         padding = padding,
         uiState = uiState.value,
