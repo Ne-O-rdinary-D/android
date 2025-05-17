@@ -29,6 +29,7 @@ fun SplashScreen() {
         verticalArrangement = Arrangement.Center
     ) {
         Image(
+            modifier = Modifier.padding(end = 24.dp),
             painter = painterResource(id = R.drawable.ic_icon),
             contentDescription = "로고",
         )

@@ -67,7 +67,7 @@ internal fun JoinScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             EditTextBox(
-                value = uiState.nickName.name,
+                value = uiState.nickName,
                 onValueChange = { onNicknameChange(it) },
                 modifier = Modifier.weight(1f)
             )
@@ -100,10 +100,7 @@ internal fun JoinScreen(
 fun JoinScreenPrev() {
     JoinScreen(
         uiState = IntroUiState.Join(
-            nickName = User(
-                id = 0,
-                name = "haha"
-            ),
+            nickName = "haha",
             interests = Interests.CLIMATE,
             validCheckType = CheckType.DUPLICATE_CHECK
         ),
