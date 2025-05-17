@@ -27,8 +27,8 @@ class MyViewModel @Inject constructor(
 
         val nickname = userRepository.getNickname()
         val interset = userRepository.getInterest()
-        quizMyRepository.getMyStatus(nickname.ifEmpty { "테스터" }
-        ).onSuccess { chapterStatusList ->
+        quizMyRepository.getMyStatus(nickname)
+            .onSuccess { chapterStatusList ->
             _uiState.update {
                 MyUiState.Success(
                     nickname = nickname,

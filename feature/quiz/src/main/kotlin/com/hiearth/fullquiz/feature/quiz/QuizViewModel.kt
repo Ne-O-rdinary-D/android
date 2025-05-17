@@ -21,10 +21,6 @@ class QuizViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<QuizUiState> = MutableStateFlow(QuizUiState.Loading)
     val uiState: StateFlow<QuizUiState> = _uiState
 
-    init {
-        getQuizList()
-    }
-
     fun selectAnswer(quizId: Int, answer: Answer) {
         var isCorrect = false
         var userAnswer = ""
@@ -58,7 +54,7 @@ class QuizViewModel @Inject constructor(
         return (_uiState.value as QuizUiState.Success).quizList.count { it.userAnswer == it.answer }
     }
 
-    private fun getQuizList() {
+    fun getQuizList() {
         viewModelScope.launch {
             quizRepository.getQuizList().onSuccess {
                 _uiState.value = QuizUiState.Success(
@@ -68,6 +64,18 @@ class QuizViewModel @Inject constructor(
             }.onFailure {
                 _uiState.value = QuizUiState.Failure(it)
             }
+        }
+    }
+
+
+    fun getQuizList(quizCategory: String) = viewModelScope.launch {
+        quizRepository.getQuizList(quizCategory).onSuccess {
+            _uiState.value = QuizUiState.Success(
+                quizList = it,
+                interests = userRepository.getInterest()
+            )
+        }.onFailure {
+            _uiState.value = QuizUiState.Failure(it)
         }
     }
 }

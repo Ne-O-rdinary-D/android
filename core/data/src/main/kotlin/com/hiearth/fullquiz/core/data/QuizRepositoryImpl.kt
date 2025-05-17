@@ -5,8 +5,6 @@ import com.hiearth.fullquiz.core.data.mapper.toResult
 import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.core.model.Quiz
 import com.hiearth.fullquiz.core.network.datasource.QuizDataSource
-import com.hiearth.fullquiz.core.network.datasource.UserDataSource
-import com.hiearth.fullquiz.core.network.di.FakeQuiz
 import javax.inject.Inject
 
 class QuizRepositoryImpl @Inject constructor(
@@ -28,12 +26,20 @@ class QuizRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun postCurrentQuiz(
-        quizId: String,
-        isCorrect: Boolean,
-        userAnswer: String
-    ): Result<Unit> {
+    override suspend fun getQuizList(category: String): Result<List<Quiz>> {
         val nickName = userRepository.getNickname()
-        return quizDataSource.postCurrentQuiz(nickName, quizId, isCorrect, userAnswer).toResult()
+
+        return quizDataSource.getQuizList(nickName, category).toResult(
+            transform = { it.data.quizResponses.map { quiz -> quiz.toQuiz() } }
+        )
     }
-}
+        override suspend fun postCurrentQuiz(
+            quizId: String,
+            isCorrect: Boolean,
+            userAnswer: String
+        ): Result<Unit> {
+            val nickName = userRepository.getNickname()
+            return quizDataSource.postCurrentQuiz(nickName, quizId, isCorrect, userAnswer)
+                .toResult()
+        }
+    }

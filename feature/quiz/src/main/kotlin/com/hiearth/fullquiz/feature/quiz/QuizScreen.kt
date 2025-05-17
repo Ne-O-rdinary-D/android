@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -48,22 +49,27 @@ internal fun QuizRoute(
     viewModel: QuizViewModel = hiltViewModel(),
     navigateHome: () -> Unit,
     navigateRanking: () -> Unit,
-    quizCategory: String
+    quizCategory: String = ""
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var currentStep by remember { mutableStateOf(0) }
     var isCompleted by remember { mutableStateOf<Boolean?>(null) }
 
-    if(isCompleted == null) {
+    LaunchedEffect(Unit) {
+        if (quizCategory.isEmpty()) viewModel.getQuizList()
+        else viewModel.getQuizList(quizCategory)
+    }
 
-    } else if(isCompleted == true) {
+    if (isCompleted == null) {
+
+    } else if (isCompleted == true) {
         val correctNum = viewModel.getCorrectQuizNum()
         FullQuizDialog(
             title = "축하해요\n챕터를 완료했어요!",
             iconResId = R.drawable.ic_celebrate,
             dismissText = "내 랭킹 보기",
             confirmText = "홈으로",
-            description = "오답 수 ${(5-correctNum)}개  정답 수 ${correctNum}개",
+            description = "오답 수 ${(5 - correctNum)}개  정답 수 ${correctNum}개",
             onDismiss = navigateRanking,
             onConfirm = navigateHome
         )
@@ -73,7 +79,7 @@ internal fun QuizRoute(
             iconResId = R.drawable.ic_wait,
             dismissText = "돌아갈래요",
             confirmText = "나갈래요",
-            onDismiss = {isCompleted = null},
+            onDismiss = { isCompleted = null },
             onConfirm = navigateHome
         )
     }

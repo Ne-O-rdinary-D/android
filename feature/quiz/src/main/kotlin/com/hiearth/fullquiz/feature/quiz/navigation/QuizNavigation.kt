@@ -11,7 +11,7 @@ import com.hiearth.fullquiz.feature.quiz.QuizRoute
 
 fun NavController.navigateQuiz(
     navOptions: NavOptions,
-    quizCategory: String
+    quizCategory: String = ""
 ) {
     navigate(Route.QuizScreenRoute(quizCategory), navOptions)
 }

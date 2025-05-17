@@ -33,7 +33,8 @@ import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 internal fun IntroRoute(
     padding: PaddingValues,
     viewModel: IntroViewModel = hiltViewModel(),
-    navigateQuiz: () -> Unit
+    navigateQuiz: () -> Unit,
+    navigateHome: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -41,6 +42,11 @@ internal fun IntroRoute(
     LaunchedEffect(Unit) {
         viewModel.getLoginState()
     }
+
+    LaunchedEffect(uiState.value) {
+        if(uiState.value is IntroUiState.Logined) navigateHome()
+    }
+
 
     IntroScreen(
         padding = padding,
