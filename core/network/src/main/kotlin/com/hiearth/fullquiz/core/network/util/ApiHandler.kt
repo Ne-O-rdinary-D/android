@@ -44,8 +44,10 @@ suspend fun <T> runRemote(block: suspend() -> Response<T>): ApiResponse<T> {
             )
         }
     } catch (e: IOException) {
+        Log.e("RetrofitError", "$e")
         ApiResponse.Failure.NetworkError(e)
     } catch (e: Exception) {
+        Log.e("RetrofitError", "$e")
         ApiResponse.Failure.UnknownApiError(e)
     }
 }

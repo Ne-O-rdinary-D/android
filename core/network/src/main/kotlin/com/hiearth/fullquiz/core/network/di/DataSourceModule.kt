@@ -6,7 +6,6 @@ import com.hiearth.fullquiz.core.network.datasource.RankDataSource
 import com.hiearth.fullquiz.core.network.datasource.UserDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeQuizDataSource
 import com.hiearth.fullquiz.core.network.retrofit.FakeRankDataSource
-import com.hiearth.fullquiz.core.network.retrofit.FakeUserDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitMyDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitRankDataSource
 import com.hiearth.fullquiz.core.network.retrofit.RetrofitUserDataSource
@@ -23,15 +22,8 @@ import javax.inject.Qualifier
 internal abstract class DataSourceModule {
 
     @Binds
-    @RealUserDataSource
     abstract fun bindUserDataSource(
         retrofitUserDataSource: RetrofitUserDataSource
-    ): UserDataSource
-
-    @Binds
-    @FakeDataSource
-    abstract fun bindFakeUserDataSource(
-        fakeUserDataSource: FakeUserDataSource
     ): UserDataSource
 
     @Binds
@@ -59,10 +51,6 @@ internal abstract class DataSourceModule {
     ): QuizDataSource
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class RealUserDataSource
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

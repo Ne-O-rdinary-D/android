@@ -57,9 +57,11 @@ class IntroViewModel @Inject constructor(
     }
 
     fun setUser() {
-        val request = uiState.value as IntroUiState.Join
-        if(request.nickName.isNotEmpty() && request.interests != null) {
-            userRepository.setUser(request.nickName, request.interests)
+        viewModelScope.launch {
+            val request = uiState.value as IntroUiState.Join
+            if(request.nickName.isNotEmpty() && request.interests != null) {
+                userRepository.setUser(request.nickName, request.interests)
+            }
         }
     }
 
@@ -76,11 +78,29 @@ class IntroViewModel @Inject constructor(
     }
 
     fun onValidCheck() {
-        (uiState.value as? IntroUiState.Join)?.let {
-            _uiState.update { prev ->
-                (prev as IntroUiState.Join).copy(
-                    validCheckType = ValidCheckType.AVAILABLE
-                )
+        viewModelScope.launch {
+            userRepository.checkNickName(
+                (uiState.value as IntroUiState.Join).nickName
+            ).onSuccess {
+                if(it.status) {
+                    _uiState.update { prev ->
+                        (prev as IntroUiState.Join).copy(
+                            validCheckType = ValidCheckType.AVAILABLE
+                        )
+                    }
+                } else {
+                    _uiState.update { prev ->
+                        (prev as IntroUiState.Join).copy(
+                            validCheckType = ValidCheckType.UNAVAILABLE
+                        )
+                    }
+                }
+            }.onFailure {
+                _uiState.update { prev ->
+                    (prev as IntroUiState.Join).copy(
+                        validCheckType = ValidCheckType.UNAVAILABLE
+                    )
+                }
             }
         }
     }
