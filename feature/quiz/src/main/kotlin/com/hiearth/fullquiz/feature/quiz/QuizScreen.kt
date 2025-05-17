@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +35,7 @@ import com.hiearth.fullquiz.core.model.Quiz
 import com.hiearth.fullquiz.core.model.QuizType
 import com.hiearth.fullquiz.feature.quiz.component.ABButtons
 import com.hiearth.fullquiz.feature.quiz.component.AnswerColumn
+import com.hiearth.fullquiz.feature.quiz.component.FullQuizDialog
 import com.hiearth.fullquiz.feature.quiz.component.OXButtons
 import com.hiearth.fullquiz.feature.quiz.component.PrevNextButtons
 import com.hiearth.fullquiz.feature.quiz.component.QuizHeader
@@ -49,6 +51,27 @@ internal fun QuizRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var currentStep by remember { mutableStateOf(0) }
+    var isCompleted by remember { mutableStateOf<Boolean?>(null) }
+
+    if(isCompleted == null) {
+
+    } else if(isCompleted == true) {
+        FullQuizDialog(
+            title = "축하해요\n챕터를 완료했어요!",
+            dismissText = "내 랭킹 보기",
+            confirmText = "홈으로",
+            onDismiss = navigateRanking,
+            onConfirm = navigateHome
+        )
+    } else {
+        FullQuizDialog(
+            title = "잠깐마요!\n정말 나가시겠어요",
+            dismissText = "돌아갈래요",
+            confirmText = "나갈래요",
+            onDismiss = {isCompleted = null},
+            onConfirm = navigateHome
+        )
+    }
 
     when (uiState) {
         is QuizUiState.Loading -> LoadingScreen()
