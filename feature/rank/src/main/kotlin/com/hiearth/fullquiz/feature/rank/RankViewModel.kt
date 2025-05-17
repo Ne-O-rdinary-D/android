@@ -3,6 +3,7 @@ package com.hiearth.fullquiz.feature.rank
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hiearth.fullquiz.core.data.RankRepository
+import com.hiearth.fullquiz.core.data.UserRepository
 import com.hiearth.fullquiz.feature.rank.model.RankUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RankViewModel @Inject constructor(
-    private val rankRepository: RankRepository
+    private val rankRepository: RankRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<RankUiState> = MutableStateFlow(RankUiState.Init)
     val uiState: StateFlow<RankUiState> = _uiState
@@ -28,7 +30,7 @@ class RankViewModel @Inject constructor(
             val rankList = it.second
             _uiState.update {
                 RankUiState.Success(
-                    nickname = myRankData.nickname,
+                    nickname = userRepository.getNickname(),
                     myRankData = myRankData,
                     rankList = rankList
                 )

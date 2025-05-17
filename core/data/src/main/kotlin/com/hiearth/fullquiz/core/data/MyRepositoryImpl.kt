@@ -1,10 +1,10 @@
 package com.hiearth.fullquiz.core.data
 
 import com.hiearth.fullquiz.core.network.datasource.MyDataSource
-import com.hiearth.fullquiz.core.network.di.RealUserDataSource
+import com.hiearth.fullquiz.core.network.di.RealDataSource
 import javax.inject.Inject
 
 class MyRepositoryImpl @Inject constructor(
-    @RealUserDataSource val myDataSource: MyDataSource
+    @RealDataSource val myDataSource: MyDataSource
 ): MyRepository {
 }

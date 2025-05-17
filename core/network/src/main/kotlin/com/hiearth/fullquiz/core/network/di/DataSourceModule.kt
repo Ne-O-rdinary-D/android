@@ -35,7 +35,7 @@ internal abstract class DataSourceModule {
     ): UserDataSource
 
     @Binds
-    @RealUserDataSource
+    @RealDataSource
     abstract fun bindRankDataSource(
         retrofitRankDataSource: RetrofitRankDataSource
     ): RankDataSource
@@ -47,7 +47,7 @@ internal abstract class DataSourceModule {
     ): RankDataSource
 
     @Binds
-    @RealUserDataSource
+    @RealDataSource
     abstract fun bindMyDataSource(
         retrofitMyDataSource: RetrofitMyDataSource
     ): MyDataSource
@@ -63,6 +63,10 @@ internal abstract class DataSourceModule {
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class RealUserDataSource
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RealDataSource
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
