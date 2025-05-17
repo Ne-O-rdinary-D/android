@@ -28,7 +28,7 @@ import com.hiearth.fullquiz.feature.my.R
 @Composable
 fun ChapterStatusList(
     chapterStatusData: Category,
-    navigateChapter: () -> Unit
+    navigateChapter: (String) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -54,7 +54,7 @@ fun ChapterStatusList(
 @Composable
 fun ChapterStatusBox(
     detailCategory: Category.DetailCategory,
-    navigateChapter: () -> Unit
+    navigateChapter: (String) -> Unit
 ) {
     val icon = when (detailCategory.status) {
         ChapterStatusType.COMPLETE -> painterResource(R.drawable.ic_completed)
@@ -68,7 +68,7 @@ fun ChapterStatusBox(
             .height(130.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
-            .clickable { navigateChapter() },
+            .clickable { navigateChapter(detailCategory.categoryName) },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

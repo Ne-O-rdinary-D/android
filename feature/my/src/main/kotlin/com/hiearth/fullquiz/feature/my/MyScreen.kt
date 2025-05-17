@@ -22,7 +22,7 @@ import com.hiearth.fullquiz.feature.my.model.MyUiState
 fun MyRoute(
     padding: PaddingValues,
     viewModel: MyViewModel = hiltViewModel(),
-    navigateQuiz: () -> Unit
+    navigateQuiz: (String) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -41,7 +41,7 @@ fun MyRoute(
 private fun MyScreen(
     padding: PaddingValues,
     uiState: MyUiState,
-    navigateQuiz: () -> Unit
+    navigateQuiz: (String) -> Unit
 ) {
 
 
