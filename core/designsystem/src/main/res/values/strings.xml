@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="string_quizing">진행중인 퀴즈</string>
+    <string name="string_homequiz_description">올바른 재활용을\n실천 중이에요</string>
+    <string name="string_continue_quiz">이어서 퀴즈 풀기</string>
+</resources>

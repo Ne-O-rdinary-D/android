@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -67,14 +68,13 @@ private fun HomeScreen(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .padding(padding)
-            .padding(top = 8.dp)
+            .padding(top = 24.dp, start = 24.dp, end = 24.dp)
             .fillMaxSize()
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Row(
             modifier = Modifier
-                .padding(24.dp)
                 .fillMaxWidth(),
         ) {
             Icon(
@@ -86,6 +86,14 @@ private fun HomeScreen(
             Spacer(modifier = Modifier.width(8.dp))
             TitleText(userName = userName)
         }
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "나의 현황",
+            style = MaterialTheme.typography.displayMedium.copy(
+                color = AppColors.Black,
+            ),
+        )
+        HomeQuizCard()
     }
 }
 
