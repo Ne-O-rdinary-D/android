@@ -1,5 +1,7 @@
 package com.hiearth.fullquiz.core.data.di
 
+import com.hiearth.fullquiz.core.data.MyRepository
+import com.hiearth.fullquiz.core.data.MyRepositoryImpl
 import com.hiearth.fullquiz.core.data.RankRepository
 import com.hiearth.fullquiz.core.data.RankRepositoryImpl
 import com.hiearth.fullquiz.core.data.UserRepository
@@ -23,4 +25,9 @@ internal abstract class RepositoryModule {
     abstract fun bindRankRepository(
         rankRepositoryImpl: RankRepositoryImpl
     ): RankRepository
+
+    @Binds
+    abstract fun bindMyRepository(
+        myRepositoryImpl: MyRepositoryImpl
+    ): MyRepository
 }

@@ -77,7 +77,7 @@ fun RankList(
         ) {
             itemsIndexed(rankList) { index, rankData ->
                 val progress = calculateRelativeProgress(index, listState)
-                val widthFraction = (1.0f - 0.3f * progress).coerceIn(0.7f, 1.0f)
+                val widthFraction = (1.0f - 0.2f * progress).coerceIn(0.8f, 1.0f)
 
                 val animatedWidth = animateDpAsState(
                     targetValue = (widthFraction * LocalConfiguration.current.screenWidthDp).dp,
@@ -85,7 +85,7 @@ fun RankList(
                 )
 
                 val animatedHeight = animateDpAsState(
-                    targetValue = (widthFraction * 100).dp,
+                    targetValue = (widthFraction * 80).dp,
                     label = ""
                 )
 
