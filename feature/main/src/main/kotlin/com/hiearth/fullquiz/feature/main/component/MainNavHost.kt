@@ -33,7 +33,8 @@ internal fun MainNavHost(
             startDestination = navigator.startDestination,
         ) {
             homeNavGraph(
-                padding = padding
+                padding = padding,
+                navigateRanking = {navigator.navigate(MainTab.RANKING)}
             )
             introNavGraph(
                 padding = padding,

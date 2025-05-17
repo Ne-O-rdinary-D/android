@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hiearth.fullquiz.core.data.UserRepository
 import com.hiearth.fullquiz.core.model.Interests
-import com.hiearth.fullquiz.feature.nickname.model.CheckType
 import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
+import com.hiearth.fullquiz.feature.nickname.model.ValidCheckType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,8 +39,8 @@ class IntroViewModel @Inject constructor(
         if (uiState.value is IntroUiState.Join) {
             _uiState.update { prev ->
                 (prev as IntroUiState.Join).copy(
+                    validCheckType = ValidCheckType.DUPLICATE_CHECK,
                     nickName = nickname,
-                    validCheckType = CheckType.DUPLICATE_CHECK
                 )
             }
         }
@@ -65,7 +65,7 @@ class IntroViewModel @Inject constructor(
 
     fun onPageMove() {
         (uiState.value as? IntroUiState.Join)?.let {
-            if (it.validCheckType == CheckType.AVAILABLE) {
+            if (it.validCheckType == ValidCheckType.AVAILABLE) {
                 _uiState.update { prev ->
                     (prev as IntroUiState.Join).copy(
                         isNameSet = !(prev.isNameSet)
@@ -79,7 +79,7 @@ class IntroViewModel @Inject constructor(
         (uiState.value as? IntroUiState.Join)?.let {
             _uiState.update { prev ->
                 (prev as IntroUiState.Join).copy(
-                    validCheckType = CheckType.AVAILABLE
+                    validCheckType = ValidCheckType.AVAILABLE
                 )
             }
         }

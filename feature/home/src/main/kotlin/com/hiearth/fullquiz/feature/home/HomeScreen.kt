@@ -41,7 +41,8 @@ import com.hiearth.fullquiz.feature.home.model.HomeUiState
 @Composable
 internal fun HomeRoute(
     padding: PaddingValues,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigateRanking: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     var userName by remember { mutableStateOf("init") }
@@ -52,6 +53,7 @@ internal fun HomeRoute(
         uiState = uiState.value,
         userName = userName,
         scrollState = scrollState,
+        navigateRanking = { navigateRanking() }
     )
 }
 

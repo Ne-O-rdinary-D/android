@@ -23,14 +23,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hiearth.fullquiz.core.designsystem.theme.AppColors
 import com.hiearth.fullquiz.core.designsystem.theme.MainGreen
-import com.hiearth.fullquiz.core.designsystem.theme.Typography
+import com.hiearth.fullquiz.core.designsystem.util.shadow
 import com.hiearth.fullquiz.core.model.Interests
 import com.hiearth.fullquiz.feature.intro.R
 
@@ -72,7 +72,7 @@ internal fun SelectInterestScreen(
 
         Text(
             text = "선택한 환경 문제부터 퀴즈를 풀 수 있어요!",
-            style = MaterialTheme.typography.displayMedium,
+            style = MaterialTheme.typography.bodyLarge,
             color = Color.Gray
         )
 
@@ -103,9 +103,8 @@ private fun SelectInterestBox(
         modifier = Modifier
             .fillMaxWidth()
             .shadow(
-                elevation = 6.dp,
-                shape = RoundedCornerShape(16.dp),
-                clip = false // 배경과 별도로 그림자만 줄 때
+                color = AppColors.Black.copy(alpha = 0.08f),
+                blur = 9.dp,
             )
             .clip(RoundedCornerShape(16.dp))
             .background(Color.White)
@@ -118,20 +117,20 @@ private fun SelectInterestBox(
             .padding(vertical = 24.dp),
         contentAlignment = Alignment.Center
     ) {
-            Image(
-                painter = painterResource(id = iconRes),
-                contentDescription = interest.displayName,
-            )
+        Image(
+            painter = painterResource(id = iconRes),
+            contentDescription = interest.displayName,
+        )
     }
 }
 
 
 @Composable
 @Preview
-private fun SelectInterestScreenPrev(){
+private fun SelectInterestScreenPrev() {
     SelectInterestScreen(
         selected = null,
-        onSelect = {  },
-        onBackClick = {  }
+        onSelect = { },
+        onBackClick = { }
     )
 }

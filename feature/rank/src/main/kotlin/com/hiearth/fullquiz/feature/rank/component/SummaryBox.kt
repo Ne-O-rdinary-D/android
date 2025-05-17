@@ -23,22 +23,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hiearth.fullquiz.core.designsystem.theme.MainGreen
-import com.hiearth.fullquiz.core.designsystem.theme.Typography
-import com.hiearth.fullquiz.feature.rank.model.MyRankData
-import com.hiearth.fullquiz.feature.rank.model.RankData
+import com.hiearth.fullquiz.core.model.RankData
 
 @Composable
 fun SummaryBox(
-    myRankData: MyRankData
+    myRankData: RankData
 ) {
     val interfaceList = listOf(
-        "현재 순위" to myRankData.myRank,
+        "현재 순위" to myRankData.rank,
         "정답 수" to myRankData.correctProblem,
         "오답 수" to myRankData.incorrectProblem
     )
 
     Box(
-        modifier =  Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .shadow(1.dp, RoundedCornerShape(12.dp))
@@ -47,13 +45,15 @@ fun SummaryBox(
             .padding(vertical = 16.dp, horizontal = 12.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             interfaceList.forEachIndexed { index, item ->
                 SummaryItem(
                     title = item.first,
-                    value = item.second.toString(),
+                    value = if (item.first == "현재 순위") item.second.toString() + "위" else item.second.toString(),
                     valueColor = if (item.first == "현재 순위") MainGreen else Color.Gray
                 )
                 if (index != interfaceList.lastIndex) {
@@ -95,6 +95,6 @@ private fun SummaryItem(
 
 @Preview
 @Composable
-private fun SummaryBox(){
-    SummaryBox(myRankData = MyRankData(1,1,1))
+private fun SummaryBox() {
+    SummaryBox(myRankData = RankData("",1, 1, 1))
 }

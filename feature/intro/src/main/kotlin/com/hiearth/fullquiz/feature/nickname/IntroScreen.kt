@@ -16,11 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hiearth.fullquiz.core.designsystem.theme.AppColors.Gray04
@@ -56,8 +53,12 @@ internal fun IntroRoute(
         onSelectInterest = {
             viewModel.onInterestChanged(it)
         },
-        onValidNickname = { },
-        navigateQuiz = { navigateQuiz() }
+        navigateQuiz = {
+            (uiState.value as? IntroUiState.Join)?.let {
+                if (it.interests != null) navigateQuiz()
+            }
+        },
+        onValidNickname = { viewModel.onValidCheck() },
     )
 }
 
@@ -149,7 +150,7 @@ fun EditTextBox(
             BasicTextField(
                 value = value,
                 onValueChange = onValueChange,
-                textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
+                textStyle = MaterialTheme.typography.bodyLarge,
                 singleLine = true,
                 modifier = Modifier
                     .weight(1f)
@@ -158,7 +159,7 @@ fun EditTextBox(
                     if (value.isEmpty()) {
                         Text(
                             text = placeholder,
-                            style = Typography.bodyMedium,
+                            style = Typography.bodyLarge,
                             color = Gray04
                         )
                     }

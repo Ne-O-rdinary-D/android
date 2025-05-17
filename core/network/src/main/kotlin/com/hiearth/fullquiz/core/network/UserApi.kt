@@ -6,7 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface UserApi {
-
     // example
     @GET("/api/user/search/all")
     suspend fun searchUser(
