@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 
-internal enum class MainTab(
+enum class MainTab(
     @DrawableRes
     val iconResId: Int,
     internal val contentDescription: String,

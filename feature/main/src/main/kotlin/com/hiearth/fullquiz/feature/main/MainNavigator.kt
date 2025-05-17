@@ -13,13 +13,13 @@ import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 import com.hiearth.fullquiz.feature.home.navigation.navigateHome
 
-internal class MainNavigator(
+class MainNavigator(
     val navController: NavHostController
 ) {
-    private val currentDestination : NavDestination?
+    private val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    val startDestination = MainTab.HOME.route
+    val startDestination: Route = Route.IntroScreenRoute
 
     val currentTab: MainTab?
         @Composable get() = MainTab.find { tab ->
@@ -40,7 +40,7 @@ internal class MainNavigator(
             restoreState = true
         }
 
-        when(tab) {
+        when (tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
             MainTab.RANKING -> TODO()
             MainTab.MY -> TODO()
@@ -52,7 +52,7 @@ internal class MainNavigator(
     }
 
     fun popBackStackIfNotHome() {
-        if(!isSameCurrentDestination<MainTabRoute.Home>()) {
+        if (!isSameCurrentDestination<MainTabRoute.Home>()) {
             popBackStack()
         }
     }
