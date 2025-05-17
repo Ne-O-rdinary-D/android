@@ -20,7 +20,7 @@ import com.hiearth.fullquiz.core.model.Interests
 @Composable
 internal fun QuizHeader(
     interests: Interests,
-    navigateRanking: () -> Unit
+    closeQuiz: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -33,7 +33,7 @@ internal fun QuizHeader(
             color = AppColors.Black
         )
         IconButton(
-            onClick = navigateRanking,
+            onClick = closeQuiz,
             modifier = Modifier.size(24.dp)
         ) {
             Icon(

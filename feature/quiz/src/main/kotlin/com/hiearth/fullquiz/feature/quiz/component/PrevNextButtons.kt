@@ -16,6 +16,7 @@ import com.hiearth.fullquiz.core.designsystem.theme.AppColors
 @Composable
 internal fun PrevNextButtons(
     quizIndex: Int = 0,
+    isSolved: Boolean = false,
     onClickPrev: () -> Unit = {},
     onClickNext: () -> Unit = {},
     onClickComplete: () -> Unit = {}
@@ -45,6 +46,7 @@ internal fun PrevNextButtons(
             modifier = Modifier
                 .weight(1f),
             shape = RoundedCornerShape(8.dp),
+            enabled = isSolved,
             onClick = if (isLast) {
                 onClickComplete
             } else {
