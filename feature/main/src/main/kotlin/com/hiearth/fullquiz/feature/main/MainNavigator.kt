@@ -12,6 +12,7 @@ import androidx.navigation.navOptions
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 import com.hiearth.fullquiz.feature.home.navigation.navigateHome
+import com.hiearth.fullquiz.feature.my.navigation.navigateMy
 import com.hiearth.fullquiz.feature.rank.navigation.navigateRank
 
 class MainNavigator(
@@ -44,7 +45,7 @@ class MainNavigator(
         when (tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
             MainTab.RANKING -> navController.navigateRank(navOptions)
-            MainTab.MY -> TODO()
+            MainTab.MY -> navController.navigateMy(navOptions)
         }
     }
 

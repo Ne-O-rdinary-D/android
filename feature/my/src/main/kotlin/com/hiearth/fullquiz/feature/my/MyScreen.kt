@@ -1,4 +1,4 @@
-package com.hiearth.fullquiz.feature.rank
+package com.hiearth.fullquiz.feature.my
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -13,53 +13,49 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.hiearth.fullquiz.feature.rank.component.NicknameRow
-import com.hiearth.fullquiz.feature.rank.component.RankList
-import com.hiearth.fullquiz.feature.rank.component.SummaryBox
-import com.hiearth.fullquiz.feature.rank.model.RankUiState
+import com.hiearth.fullquiz.feature.my.component.ChapterStatusList
+import com.hiearth.fullquiz.feature.my.component.NicknameRow
+import com.hiearth.fullquiz.feature.my.model.MyUiState
 
 @Composable
-fun RankRoute(
+fun MyRoute(
     padding: PaddingValues,
-    viewModel: RankViewModel = hiltViewModel()
+    viewModel: MyViewModel = hiltViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-
-    RankScreen(
-        padding = padding,
-        uiState = uiState.value
+    MyScreen(
+        padding,
+        uiState.value
     )
 }
 
 @Composable
-private fun RankScreen(
+private fun MyScreen(
     padding: PaddingValues,
-    uiState: RankUiState
+    uiState: MyUiState
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(padding)
             .background(MaterialTheme.colorScheme.background)
-            .padding(top = 24.dp, start = 24.dp, end = 24.dp, bottom = 24.dp)
+            .padding(padding)
+            .padding(24.dp)
+
     ) {
         when (uiState) {
-            is RankUiState.Failure -> {}
-            RankUiState.Init -> {}
-            RankUiState.Loading -> {}
-            is RankUiState.Success -> {
+            is MyUiState.Failure -> {}
+            MyUiState.Init -> {}
+            MyUiState.Loading -> {}
+            is MyUiState.Success -> {
                 NicknameRow(uiState.nickname)
+                Spacer(modifier = Modifier.height(40.dp))
 
-                Spacer(modifier = Modifier.height(24.dp))
-
-                SummaryBox(uiState.myRankData)
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                RankList(uiState.rankList, uiState.nickname)
+                uiState.chapterStatusList.forEach {
+                    ChapterStatusList(it)
+                    Spacer(Modifier.height(24.dp))
+                }
             }
         }
-
     }
 }

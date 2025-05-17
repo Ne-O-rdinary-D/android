@@ -18,11 +18,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hiearth.fullquiz.core.designsystem.theme.MainGreen
-import com.hiearth.fullquiz.core.designsystem.theme.Typography
 import com.hiearth.fullquiz.feature.rank.model.RankData
 
 @Composable
@@ -87,7 +85,7 @@ private fun RankBox(rankData: RankData, nickname: String) {
             Text(
                 text = "정답 ${rankData.correctProblem}개",
                 style = MaterialTheme.typography.displayMedium,
-                color = Color.Gray
+                color = Color.Black
             )
         }
     }
