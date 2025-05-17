@@ -36,7 +36,7 @@ import com.hiearth.fullquiz.feature.nickname.model.IntroUiState
 internal fun IntroRoute(
     padding: PaddingValues,
     viewModel: IntroViewModel = hiltViewModel(),
-    navigateToHome: () -> Unit
+    navigateQuiz: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -55,7 +55,7 @@ internal fun IntroRoute(
         onSelectInterest = {
             viewModel.onInterestChanged(it)
         },
-        onJoin = { navigateToHome() },
+        onJoin = { navigateQuiz() },
         onValidNickname = { }
     )
 }

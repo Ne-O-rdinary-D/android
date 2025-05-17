@@ -12,6 +12,7 @@ import androidx.navigation.navOptions
 import com.hiearth.fullquiz.core.navigation.MainTabRoute
 import com.hiearth.fullquiz.core.navigation.Route
 import com.hiearth.fullquiz.feature.home.navigation.navigateHome
+import com.hiearth.fullquiz.feature.quiz.navigateQuiz
 
 class MainNavigator(
     val navController: NavHostController
@@ -25,6 +26,11 @@ class MainNavigator(
         @Composable get() = MainTab.find { tab ->
             currentDestination?.hasRoute(tab::class) == true
         }
+
+    private val singleTopOptions = navOptions {
+        launchSingleTop = true
+        restoreState = true
+    }
 
     fun navigate(tab: MainTab) {
         val navOptions = navOptions {
@@ -45,6 +51,10 @@ class MainNavigator(
             MainTab.RANKING -> TODO()
             MainTab.MY -> TODO()
         }
+    }
+
+    fun navigateQuiz() {
+        navController.navigateQuiz(singleTopOptions)
     }
 
     private fun popBackStack() {
