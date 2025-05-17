@@ -1,39 +1,23 @@
 package com.hiearth.fullquiz.core.network.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class RankResponse(
-    @SerializedName("status")
     val status: Int,
-
-    @SerializedName("message")
-    val message: String? = null,
-
-    @SerializedName("data")
     val data: RankDataWrapper,
-
-    @SerializedName("errorCode")
-    val errorCode: String? = null
 )
 
+@Serializable
 data class RankDataWrapper(
-    @SerializedName("myInfo")
     val myInfo: RankUserData,
-
-    @SerializedName("userRankingList")
     val userRankingList: List<RankUserData>
 )
 
+@Serializable
 data class RankUserData(
-    @SerializedName("nowRank")
     val nowRank: Int,
-
-    @SerializedName("nickname")
     val nickname: String,
-
-    @SerializedName("answerCnt")
     val answerCnt: Int,
-
-    @SerializedName("wrongCnt")
     val wrongCnt: Int
 )

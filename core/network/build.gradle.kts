@@ -30,5 +30,4 @@ dependencies {
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
     implementation(libs.kotlinx.serialization.json)
-    implementation("com.google.code.gson:gson:2.10.1")
 }
