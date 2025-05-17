@@ -42,6 +42,8 @@ internal class MainNavigator(
 
         when(tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
+            MainTab.RANKING -> TODO()
+            MainTab.MY -> TODO()
         }
     }
 

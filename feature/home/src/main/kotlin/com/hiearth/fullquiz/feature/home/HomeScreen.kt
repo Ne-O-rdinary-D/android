@@ -1,5 +1,6 @@
 package com.hiearth.fullquiz.feature.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -53,6 +54,7 @@ private fun HomeScreen(
 ) {
     Column(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
             .padding(padding)
             .padding(16.dp)
             .fillMaxSize(),

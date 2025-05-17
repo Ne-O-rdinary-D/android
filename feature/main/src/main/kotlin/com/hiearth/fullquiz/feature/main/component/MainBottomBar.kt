@@ -6,12 +6,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +21,7 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.hiearth.fullquiz.core.designsystem.theme.AppColors
 import com.hiearth.fullquiz.core.designsystem.theme.FullQuizTheme
 import com.hiearth.fullquiz.feature.main.MainTab
 import kotlinx.collections.immutable.PersistentList
@@ -50,18 +52,13 @@ internal fun MainBottomBar(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(56.dp)
-                .border(
-                    width = 1.dp,
-                    color = MaterialTheme.colorScheme.outline,
-                    shape = RoundedCornerShape(size = 28.dp),
-                )
+                .height(64.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
-                    shape = RoundedCornerShape(28.dp),
+                    color = AppColors.White,
+                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                 )
-                .padding(horizontal = 28.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                .padding(horizontal = 44.dp),
+            horizontalArrangement = Arrangement.spacedBy(64.dp),
         ) {
             tabs.forEach { tab ->
                 MainBottomBarItem(
@@ -81,10 +78,10 @@ private fun RowScope.MainBottomBarItem(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    Box(
+    Column (
         modifier = modifier
             .weight(1f)
-            .fillMaxHeight()
+            .height(64.dp)
             .selectable(
                 selected = selected,
                 indication = null,
@@ -92,17 +89,24 @@ private fun RowScope.MainBottomBarItem(
                 interactionSource = remember { MutableInteractionSource() },
                 onClick = onClick,
             ),
-        contentAlignment = Alignment.Center,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
             painter = painterResource(tab.iconResId),
             contentDescription = tab.contentDescription,
-            tint = if (selected) {
-                MaterialTheme.colorScheme.secondary
-            } else {
-                MaterialTheme.colorScheme.outline
-            },
-            modifier = Modifier.size(34.dp),
+            tint = if (selected) AppColors.Gray07 else AppColors.Gray04,
+            modifier = Modifier.size(24.dp),
+        )
+
+        Spacer(modifier = Modifier.height(9.dp))
+
+        Text(
+            text = tab.contentDescription,
+            style = MaterialTheme.typography.bodySmall.copy(
+                color = if (selected) AppColors.Gray07 else AppColors.Gray04
+            ),
+            maxLines = 1,
         )
     }
 }

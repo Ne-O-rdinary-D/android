@@ -13,4 +13,10 @@ sealed interface Route {
 sealed interface MainTabRoute : Route {
     @Serializable
     data object Home : MainTabRoute
+
+    @Serializable
+    data object Ranking : MainTabRoute
+
+    @Serializable
+    data object My : MainTabRoute
 }
