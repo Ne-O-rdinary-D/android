@@ -19,10 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,7 +38,8 @@ import com.hiearth.fullquiz.feature.home.model.HomeUiState
 internal fun HomeRoute(
     padding: PaddingValues,
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateRanking: () -> Unit
+    navigateRanking: () -> Unit,
+    navigateMy: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val userName = viewModel.nickName
@@ -53,7 +50,8 @@ internal fun HomeRoute(
         uiState = uiState.value,
         userName = userName,
         scrollState = scrollState,
-        navigateRanking = { navigateRanking() }
+        navigateRanking = { navigateRanking() },
+        navigateMy = { navigateMy() }
     )
 }
 
@@ -64,8 +62,8 @@ private fun HomeScreen(
     userName: String = "지구모아",
     currentStep: Int = 0,
     scrollState: ScrollState = rememberScrollState(),
-    navigateQuiz: () -> Unit = {},
-    navigateRanking: () -> Unit = {}
+    navigateRanking: () -> Unit = {},
+    navigateMy: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -87,7 +85,7 @@ private fun HomeScreen(
                 tint = MaterialTheme.colorScheme.primary
             )
             Spacer(modifier = Modifier.width(8.dp))
-            TitleText(userName = if(uiState is HomeUiState.Success) uiState.nickname else userName)
+            TitleText(userName = if (uiState is HomeUiState.Success) uiState.nickname else userName)
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -98,7 +96,7 @@ private fun HomeScreen(
         )
         HomeQuizCard(
             currentStep = currentStep,
-            navigateQuiz = navigateQuiz
+            navigateMy = navigateMy
         )
         Text(
             text = "나의 랭킹 순위는?",
@@ -126,13 +124,5 @@ private fun TitleText(
             }
         },
         style = MaterialTheme.typography.displayMedium
-    )
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFF6F6F6)
-@Composable
-private fun HomeScreenPreview() {
-    HomeScreen(
-        padding = PaddingValues(0.dp),
     )
 }

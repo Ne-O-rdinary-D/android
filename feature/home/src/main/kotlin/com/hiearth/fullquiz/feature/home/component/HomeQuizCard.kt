@@ -30,7 +30,7 @@ import com.hiearth.fullquiz.core.designsystem.util.shadow
 @Composable
 internal fun HomeQuizCard(
     currentStep: Int = 2,
-    navigateQuiz: () -> Unit = {}
+    navigateMy: () -> Unit = {}
 ) {
     Card(
         shape = RoundedCornerShape(20.dp),
@@ -66,7 +66,7 @@ internal fun HomeQuizCard(
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
-                onClick = navigateQuiz,
+                onClick = navigateMy,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary
                 )

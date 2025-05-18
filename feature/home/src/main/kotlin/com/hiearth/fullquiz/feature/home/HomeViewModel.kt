@@ -29,5 +29,4 @@ class HomeViewModel @Inject constructor(
 
     }
     val nickName = userRepository.getNickname()
-
 }

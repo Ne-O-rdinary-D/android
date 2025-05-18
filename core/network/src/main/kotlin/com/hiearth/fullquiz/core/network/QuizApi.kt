@@ -1,6 +1,7 @@
 package com.hiearth.fullquiz.core.network
 
 import com.hiearth.fullquiz.core.network.model.request.QuizRequest
+import com.hiearth.fullquiz.core.network.model.response.QuizProgressResponse
 import com.hiearth.fullquiz.core.network.model.response.QuizResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -27,6 +28,6 @@ interface QuizApi {
 
     @GET("/api/quizzes/{quizProgressId}")
     suspend fun getProgressQuiz(
-
-    )
+        @Path("quizProgressId") quizProgressId: Long
+    ): Response<QuizProgressResponse>
 }

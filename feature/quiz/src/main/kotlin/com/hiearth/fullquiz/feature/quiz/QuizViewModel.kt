@@ -77,11 +77,11 @@ class QuizViewModel @Inject constructor(
                 var step = 0
 
                 _uiState.value = QuizUiState.Success(
-                    quizList = it,
+                    quizList = it.quizList,
                     interests = userRepository.getInterest()
                 )
 
-                it.forEach {
+                it.quizList.forEach {
                     if (it.userAnswer != null) step++
                 }
 
@@ -94,13 +94,24 @@ class QuizViewModel @Inject constructor(
 
 
     fun getQuizList(quizCategory: String) = viewModelScope.launch {
-        quizRepository.getQuizList(quizCategory).onSuccess {
-            _uiState.value = QuizUiState.Success(
-                quizList = it,
-                interests = userRepository.getInterest()
-            )
-        }.onFailure {
-            _uiState.value = QuizUiState.Failure(it)
+        val progressList = userRepository.getProgressIdList()
+        if (progressList.map { it.first }.contains(quizCategory)) {
+            quizRepository.getProgressQuiz(progressList.find { it.first == quizCategory }!!.second.toLong())
+                .onSuccess {
+                    _uiState.value = QuizUiState.Success(
+                        quizList = it.quizList,
+                        interests = userRepository.getInterest()
+                    )
+                }
+        } else {
+            quizRepository.getQuizList(quizCategory).onSuccess {
+                _uiState.value = QuizUiState.Success(
+                    quizList = it.quizList,
+                    interests = userRepository.getInterest()
+                )
+            }.onFailure {
+                _uiState.value = QuizUiState.Failure(it)
+            }
         }
     }
 }

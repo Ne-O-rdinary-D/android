@@ -1,5 +1,10 @@
 package com.hiearth.fullquiz.core.model
 
+data class QuizListDataSet(
+    val progressId: Int,
+    val quizList: List<Quiz>
+)
+
 data class Quiz(
     val quizId: Int,
     val quizType: QuizType,
