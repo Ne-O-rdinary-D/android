@@ -34,7 +34,8 @@ fun MainNavHost(
         ) {
             homeNavGraph(
                 padding = padding,
-                navigateRanking = { navigator.navigate(MainTab.RANKING) }
+                navigateRanking = { navigator.navigate(MainTab.RANKING) },
+                navigateMy = {navigator.navigate(MainTab.MY)}
             )
 
             introNavGraph(

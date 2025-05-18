@@ -10,4 +10,7 @@ interface UserRepository {
     fun getNickname(): String
     fun getInterest(): Interests
     fun clearAll()
+
+    suspend fun setProgressIdList(progressList: List<Pair<String, Int>>)
+    fun getProgressIdList(): List<Pair<String, Int>>
 }

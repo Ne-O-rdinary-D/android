@@ -16,12 +16,14 @@ fun NavController.navigateHome(
 
 fun NavGraphBuilder.homeNavGraph(
     padding: PaddingValues,
-    navigateRanking: () -> Unit
+    navigateRanking: () -> Unit,
+    navigateMy: () -> Unit
 ) {
     composable<MainTabRoute.Home> {
         HomeRoute(
             padding = padding,
-            navigateRanking = navigateRanking
+            navigateRanking = navigateRanking,
+            navigateMy = navigateMy
         )
     }
 }

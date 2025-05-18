@@ -1,6 +1,5 @@
 package com.hiearth.fullquiz.core.data
 
-import android.util.Log
 import com.hiearth.fullquiz.core.data.mapper.toNickNameCheck
 import com.hiearth.fullquiz.core.data.mapper.toResult
 import com.hiearth.fullquiz.core.local.datasource.PreferenceDataSource
@@ -22,7 +21,7 @@ internal class UserRepositoryImpl @Inject constructor(
 
     override suspend fun setUser(nickName: String, interest: Interests) {
         preferenceDataSource.setNickname(nickName)
-        when(val result = userDataSource.signUp(nickName)) {
+        when (val result = userDataSource.signUp(nickName)) {
             is ApiResponse.Failure.HttpError -> throw Throwable(result.message)
             is ApiResponse.Failure.NetworkError -> throw Throwable(result.throwable)
             is ApiResponse.Failure.UnknownApiError -> throw Throwable(result.throwable)
@@ -42,5 +41,13 @@ internal class UserRepositoryImpl @Inject constructor(
 
     override fun clearAll() {
         preferenceDataSource.clearAll()
+    }
+
+    override suspend fun setProgressIdList(progressList: List<Pair<String, Int>>) {
+        preferenceDataSource.setProgressIdList(progressList)
+    }
+
+    override fun getProgressIdList(): List<Pair<String, Int>> {
+        return preferenceDataSource.getProgressIdList()
     }
 }

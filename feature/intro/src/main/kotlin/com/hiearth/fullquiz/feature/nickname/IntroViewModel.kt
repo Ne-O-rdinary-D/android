@@ -1,6 +1,5 @@
 package com.hiearth.fullquiz.feature.nickname
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hiearth.fullquiz.core.data.UserRepository
@@ -36,6 +35,7 @@ class IntroViewModel @Inject constructor(
     }
 
     fun onNicknameChanged(nickname: String) {
+        if (nickname.length > 7) return
         if (uiState.value is IntroUiState.Join) {
             _uiState.update { prev ->
                 (prev as IntroUiState.Join).copy(
@@ -60,7 +60,7 @@ class IntroViewModel @Inject constructor(
         viewModelScope.launch {
             val request = uiState.value as IntroUiState.Join
             val name = request.nickName
-            if(request.nickName.isNotEmpty() && request.interests != null) {
+            if (request.nickName.isNotEmpty() && request.interests != null) {
                 userRepository.setUser(name, request.interests)
             }
         }
@@ -79,11 +79,17 @@ class IntroViewModel @Inject constructor(
     }
 
     fun onValidCheck() {
+        if ((uiState.value as IntroUiState.Join).nickName.length < 2) {
+            _uiState.update { prev->
+                (prev as IntroUiState.Join).copy(validCheckType = ValidCheckType.UNAVAILABLE)
+            }
+            return
+        }
         viewModelScope.launch {
             userRepository.checkNickName(
                 (uiState.value as IntroUiState.Join).nickName
             ).onSuccess {
-                if(it.status) {
+                if (it.status) {
                     _uiState.update { prev ->
                         (prev as IntroUiState.Join).copy(
                             validCheckType = ValidCheckType.AVAILABLE
